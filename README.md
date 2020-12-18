@@ -1,16 +1,22 @@
-### Hi there 👋
+# Rogue MMA
 
-<!--
-**rogue-mma/Rogue-MMA** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+### Motivation
 
-Here are some ideas to get you started:
+I love mixed martial arts (MMA) and statistics. Rogue MMA is project allowing me to combine these otherwise disperate interests. MMA is a volitile sport. Outcomes are difficult to predict. The sport's stars shine brightly but briefly. Nonetheless, in principle, there are patterns and trends in the fight game. One can breakdown a particular fight to understand what has transpired. One can also look at trends across fights to try to understand what factors seem to contribute to the success of fighters, on average. I am primarily interested in the latter - large scale analysis of factors that affect average fighter performance.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+### Questions
+
+- How well to vegas odds predict fight outcomes?
+- Does fighter REACH tend to matter?
+- Who are the most underrated fighters?
+- Which fighters have outlying fight stats?
+- Generally, which fight stats predict fighter success? 
+
+### Tools
+
+- Exploratory Data Analysis: presenting raw data in various ways using informative graphs (I like ggplot)
+- Bayesian Modelling: I like intuitive probabilistic interpretation afforded to me by Bayesian inference (Andrew Gelman is smart)
+
+### Favorite Fighter
+
+Khabib Nurmegomedov 
