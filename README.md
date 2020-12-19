@@ -1,14 +1,16 @@
 # Code 
 
-[Get Current Fighter Stats](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_current_fighter_stats.html)
+### Data Collection:
 
-[Get Fighter Stats](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_fighter_stats.html)
+* [Get Current Fighter Stats](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_current_fighter_stats.html)
+* [Get Fighter Stats](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_fighter_stats.html)
+* [Get UFC Event Info](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_event_info.html)
+* [Get Fight Odds](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_fight_odds.html)
+* [Combine Scrapped Data](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/combine_scrapped_data.html)
 
-[Get UFC Event Info](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_event_info.html)
+### Analysis:
 
-[Get Fight Odds](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_fight_odds.html)
-
-[Combine Scrapped Data](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/combine_scrapped_data.html)
+COMING SOON...
 
 # Rogue MMA
 
