@@ -6,7 +6,7 @@
 * [Get Fighter Stats](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_fighter_stats.html)
 * [Get UFC Event Info](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_event_info.html)
 * [Get Fight Odds](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_fight_odds.html)
-* [Combine Scrapped Data](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/combine_scrapped_data.html)
+* [Combine Scrapped Data](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/combine_scraped_data.html)
 
 ### Analysis:
 
