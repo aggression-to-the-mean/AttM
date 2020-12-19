@@ -1,3 +1,15 @@
+# Code 
+
+[Get Current Fighter Stats](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_current_fighter_stats.html)
+
+[Get Fighter Stats](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_fighter_stats.html)
+
+[Get UFC Event Info](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_event_info.html)
+
+[Get Fight Odds](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_fight_odds.html)
+
+[Combine Scrapped Data](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/combine_scrapped_data.html)
+
 # Rogue MMA
 
 ### Motivation
