@@ -10,7 +10,7 @@
 
 ### Analysis:
 
-COMING SOON...
+* [Fight Odds Analysis](https://rogue-mma.github.io/Rogue-MMA/Analysis/fight_odds_analysis.html)
 
 # Rogue MMA
 
