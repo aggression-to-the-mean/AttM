@@ -1,18 +1,8 @@
-# Code 
-
-### Data Collection:
-
-* [Get Current Fighter Stats](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_current_fighter_stats.html)
-* [Get Fighter Stats](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_fighter_stats.html)
-* [Get UFC Event Info](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_event_info.html)
-* [Get Fight Odds](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_fight_odds.html)
-* [Combine Scrapped Data](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/combine_scraped_data.html)
-
-### Analysis:
-
-* [Fight Odds Analysis](https://rogue-mma.github.io/Rogue-MMA/Analysis/fight_odds_analysis.html)
-
 # Rogue MMA
+
+### Posts
+
+* [Understanding Fight Odds](https://rogue-mma.github.io/Rogue-MMA/For-The-People/understanding_fight_odds.html)
 
 ### Motivation
 
@@ -20,7 +10,7 @@ I love mixed martial arts (MMA) and statistics. Rogue MMA is project allowing me
 
 ### Questions
 
-- How well to vegas odds predict fight outcomes?
+- [How well to vegas odds predict fight outcomes?](https://rogue-mma.github.io/Rogue-MMA/For-The-People/understanding_fight_odds.html)
 - Does fighter REACH tend to matter?
 - Who are the most underrated fighters?
 - Which fighters have outlying fight stats?
@@ -34,3 +24,17 @@ I love mixed martial arts (MMA) and statistics. Rogue MMA is project allowing me
 ### Favorite Fighter
 
 Khabib Nurmegomedov 
+
+# Code 
+
+### Data Collection:
+
+* [Get Current Fighter Stats](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_current_fighter_stats.html)
+* [Get Fighter Stats](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_fighter_stats.html)
+* [Get UFC Event Info](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_event_info.html)
+* [Get Fight Odds](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_fight_odds.html)
+* [Combine Scrapped Data](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/combine_scraped_data.html)
+
+### Analysis:
+
+* [Fight Odds Analysis](https://rogue-mma.github.io/Rogue-MMA/Analysis/fight_odds_analysis.html)
