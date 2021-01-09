@@ -1,16 +1,16 @@
-# Rogue MMA
+# Aggression to the Mean
 
 ### Posts
 
-* [Understanding Fight Odds](https://rogue-mma.github.io/Rogue-MMA/For-The-People/understanding_fight_odds.html)
+* [Understanding Fight Odds](https://aggression-to-the-mean.github.io/AttM/For-The-People/understanding_fight_odds.html)
 
 ### Motivation
 
-I love mixed martial arts (MMA) and statistics. Rogue MMA is project allowing me to combine these otherwise disperate interests. MMA is a volitile sport. Outcomes are difficult to predict. The sport's stars shine brightly but briefly. Nonetheless, in principle, there are patterns and trends in the fight game. One can breakdown a particular fight to understand what has transpired. One can also look at trends across fights to try to understand what factors seem to contribute to the success of fighters, on average. I am primarily interested in the latter - large scale analysis of factors that affect average fighter performance.
+I love mixed martial arts (MMA) and statistics. Aggression to the Mean (AttM) is project allowing me to combine these otherwise disperate interests. MMA is a volitile sport. Outcomes are difficult to predict. The sport's stars shine brightly but briefly. Nonetheless, in principle, there are patterns and trends in the fight game. One can breakdown a particular fight to understand what has transpired. One can also look at trends across fights to try to understand what factors seem to contribute to the success of fighters, on average. I am primarily interested in the latter - large scale analysis of factors that affect average fighter performance.
 
 ### Questions
 
-- [How well to vegas odds predict fight outcomes?](https://rogue-mma.github.io/Rogue-MMA/For-The-People/understanding_fight_odds.html)
+- [How well to vegas odds predict fight outcomes?](https://aggression-to-the-mean.github.io/AttM/For-The-People/understanding_fight_odds.html)
 - Does fighter REACH tend to matter?
 - Who are the most underrated fighters?
 - Which fighters have outlying fight stats?
@@ -29,12 +29,12 @@ Khabib Nurmegomedov
 
 ### Data Collection:
 
-* [Get Current Fighter Stats](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_current_fighter_stats.html)
-* [Get Fighter Stats](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_fighter_stats.html)
-* [Get UFC Event Info](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_event_info.html)
-* [Get Fight Odds](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/get_fight_odds.html)
-* [Combine Scrapped Data](https://rogue-mma.github.io/Rogue-MMA/Data-Collection/combine_scraped_data.html)
+* [Get Current Fighter Stats](https://aggression-to-the-mean.github.io/AttM/Data-Collection/get_current_fighter_stats.html)
+* [Get Fighter Stats](https://aggression-to-the-mean.github.io/AttM/Data-Collection/get_fighter_stats.html)
+* [Get UFC Event Info](https://aggression-to-the-mean.github.io/AttM/Data-Collection/get_event_info.html)
+* [Get Fight Odds](https://aggression-to-the-mean.github.io/AttM/Data-Collection/get_fight_odds.html)
+* [Combine Scrapped Data](https://aggression-to-the-mean.github.io/AttM/Data-Collection/combine_scraped_data.html)
 
 ### Analysis:
 
-* [Fight Odds Analysis](https://rogue-mma.github.io/Rogue-MMA/Analysis/fight_odds_analysis.html)
+* [Fight Odds Analysis](https://aggression-to-the-mean.github.io/AttM/Analysis/fight_odds_analysis.html)
