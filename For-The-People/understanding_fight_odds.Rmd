@@ -1,6 +1,6 @@
 ---
 title: "Understanding Fight Odds"
-author: "Rogue MMA"
+author: "Aggression to the Mean"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
   prettydoc::html_pretty:
@@ -9,8 +9,8 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, root.dir = "/Users/Shared/Rogue-MMA") 
-setwd("/Users/Shared/Rogue-MMA")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, root.dir = "/Users/Shared/AttM") 
+setwd("/Users/Shared/AttM")
 ```
 
  <br>
@@ -187,7 +187,7 @@ df_odds_short %>%
 
 ```
 
-Using data science tools such as web scraping, I have obtained a dataset with fight odds information regarding the majority of the UFC fights that occurred between 2013 and present (for code, see [here](https://github.com/rogue-mma/Rogue-MMA/tree/main/Data-Collection)).   
+Using data science tools such as web scraping, I have obtained a dataset with fight odds information regarding the majority of the UFC fights that occurred between 2013 and present (for code, see [here](https://github.com/aggression-to-the-mean/AttM/tree/main/Data-Collection)).   
 
 ```{r include== F, echo = F}
 nfights = nrow(df_odds_short)

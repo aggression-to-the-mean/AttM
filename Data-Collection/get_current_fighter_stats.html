@@ -406,8 +406,8 @@ clean_date &lt;- as.Date(clean_date2, format = &quot;%B %d, %Y&quot;)</code></pr
 <div id="load-fighter-stats-database" class="section level4">
 <h4>Load fighter stats database</h4>
 <pre class="r"><code>load(&quot;./Datasets/current_fighter_stats.RData&quot;)
-master_temp = data_clean 
-rm(data_clean)  
+master_temp = current_fighter_stats
+rm(current_fighter_stats)  
 most_recent_date = max(unique(master_temp$Event_Date))</code></pre>
 <p><br></p>
 </div>
@@ -553,7 +553,7 @@ for(i in 1:length(url_list)) {
 # stop the clock
 print(proc.time() - ptm) </code></pre>
 <pre><code>##    user  system elapsed 
-##   2.684   0.056   8.133</code></pre>
+##   3.156   0.062  11.738</code></pre>
 <p><br></p>
 </div>
 </div>
@@ -607,34 +607,38 @@ data_add_wc &lt;- mutate(
 ## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
 <p>Examine data frame.</p>
 <pre class="r"><code>summary(data_clean)</code></pre>
-<pre><code>##      NAME               Weight          REACH            SLPM      
-##  Length:20          Min.   :115.0   Min.   :60.00   Min.   :0.000  
-##  Class :character   1st Qu.:125.0   1st Qu.:67.50   1st Qu.:3.055  
-##  Mode  :character   Median :145.0   Median :70.50   Median :4.260  
-##                     Mean   :152.7   Mean   :70.75   Mean   :3.920  
-##                     3rd Qu.:155.0   3rd Qu.:74.00   3rd Qu.:4.628  
-##                     Max.   :245.0   Max.   :81.00   Max.   :7.510  
+<pre><code>##      NAME               Weight        REACH            SLPM      
+##  Length:26          Min.   :125   Min.   :65.00   Min.   :0.000  
+##  Class :character   1st Qu.:145   1st Qu.:71.00   1st Qu.:3.002  
+##  Mode  :character   Median :170   Median :73.00   Median :3.790  
+##                     Mean   :170   Mean   :72.36   Mean   :3.632  
+##                     3rd Qu.:185   3rd Qu.:75.00   3rd Qu.:4.450  
+##                     Max.   :264   Max.   :77.00   Max.   :8.040  
+##                                   NA&#39;s   :1                      
 ##       SAPM            STRA             STRD              TD       
 ##  Min.   :0.000   Min.   :0.0000   Min.   :0.0000   Min.   :0.000  
-##  1st Qu.:2.808   1st Qu.:0.4475   1st Qu.:0.5100   1st Qu.:0.580  
-##  Median :3.270   Median :0.4750   Median :0.5700   Median :1.330  
-##  Mean   :3.094   Mean   :0.4635   Mean   :0.5315   Mean   :1.423  
-##  3rd Qu.:3.735   3rd Qu.:0.5200   3rd Qu.:0.6200   3rd Qu.:1.915  
-##  Max.   :4.300   Max.   :0.7100   Max.   :0.7300   Max.   :4.570  
-##       TDA              TDD              SUBA        Num_Fights   
-##  Min.   :0.0000   Min.   :0.0000   Min.   :0.00   Min.   : 1.00  
-##  1st Qu.:0.2575   1st Qu.:0.5175   1st Qu.:0.40   1st Qu.: 4.00  
-##  Median :0.4200   Median :0.6000   Median :1.05   Median : 9.50  
-##  Mean   :0.3755   Mean   :0.5800   Mean   :1.34   Mean   :11.15  
-##  3rd Qu.:0.5000   3rd Qu.:0.7050   3rd Qu.:2.25   3rd Qu.:14.25  
-##  Max.   :0.6600   Max.   :1.0000   Max.   :3.30   Max.   :28.00  
+##  1st Qu.:2.658   1st Qu.:0.3900   1st Qu.:0.4950   1st Qu.:0.275  
+##  Median :3.620   Median :0.4200   Median :0.5500   Median :0.715  
+##  Mean   :3.697   Mean   :0.4265   Mean   :0.5169   Mean   :1.115  
+##  3rd Qu.:4.478   3rd Qu.:0.4875   3rd Qu.:0.5875   3rd Qu.:1.645  
+##  Max.   :7.260   Max.   :0.6700   Max.   :0.6900   Max.   :4.250  
+##                                                                   
+##       TDA              TDD              SUBA          Num_Fights    
+##  Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   : 1.000  
+##  1st Qu.:0.0750   1st Qu.:0.3375   1st Qu.:0.0000   1st Qu.: 3.000  
+##  Median :0.2350   Median :0.6000   Median :0.0000   Median : 4.000  
+##  Mean   :0.3008   Mean   :0.5235   Mean   :0.5577   Mean   : 8.615  
+##  3rd Qu.:0.4475   3rd Qu.:0.7425   3rd Qu.:0.6000   3rd Qu.:11.250  
+##  Max.   :1.0000   Max.   :1.0000   Max.   :4.0000   Max.   :27.000  
+##                                                                     
 ##    Event_Date           Data_Date          WeightClass       
-##  Min.   :2020-12-12   Min.   :2020-12-12   Length:20         
-##  1st Qu.:2020-12-12   1st Qu.:2020-12-12   Class :character  
-##  Median :2020-12-12   Median :2020-12-12   Mode  :character  
-##  Mean   :2020-12-12   Mean   :2020-12-12                     
-##  3rd Qu.:2020-12-12   3rd Qu.:2020-12-12                     
-##  Max.   :2020-12-12   Max.   :2020-12-12</code></pre>
+##  Min.   :2021-01-16   Min.   :2021-01-09   Length:26         
+##  1st Qu.:2021-01-16   1st Qu.:2021-01-09   Class :character  
+##  Median :2021-01-16   Median :2021-01-09   Mode  :character  
+##  Mean   :2021-01-16   Mean   :2021-01-09                     
+##  3rd Qu.:2021-01-16   3rd Qu.:2021-01-09                     
+##  Max.   :2021-01-16   Max.   :2021-01-09                     
+## </code></pre>
 <p><br></p>
 </div>
 <div id="append-fighter-stats-database" class="section level3">
@@ -657,7 +661,7 @@ data_add_wc &lt;- mutate(
 } else {
   print(&quot;ERROR: The next event date may be greater than what is recorded in this data set...&quot;)
 }</code></pre>
-<pre><code>## [1] &quot;Info from 2020-12-12 will be replaced by that from 2020-12-12&quot;</code></pre>
+<pre><code>## [1] &quot;Info from 2021-01-05 will be replaced by that from 2021-01-09&quot;</code></pre>
 <pre class="r"><code># combine data
 current_fighter_stats = rbind(master_temp, data_clean)</code></pre>
 <p><br></p>

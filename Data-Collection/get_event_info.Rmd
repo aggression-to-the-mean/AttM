@@ -4,8 +4,8 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, root.dir = "/Users/Shared/Rogue-MMA")
-setwd("/Users/Shared/Rogue-MMA")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, root.dir = "/Users/Shared/AttM")
+setwd("/Users/Shared/AttM")
 ```
 
 ## Description 

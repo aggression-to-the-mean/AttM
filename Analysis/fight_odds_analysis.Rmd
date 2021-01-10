@@ -1,14 +1,14 @@
 ---
 title: "Fight Odds Analysis"
-author: "Rogue MMA"
+author: "Aggression to the Mean"
 output:
   html_document:
     df_print: paged
 ---
 
 ```{r setup, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, root.dir = "/Users/Shared/Rogue-MMA") 
-setwd("/Users/Shared/Rogue-MMA")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, root.dir = "/Users/Shared/AttM") 
+setwd("/Users/Shared/AttM")
 ```
 
  <br>

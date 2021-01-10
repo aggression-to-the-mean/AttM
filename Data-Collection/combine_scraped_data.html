@@ -451,7 +451,7 @@ df_fight_lose = merge(event_info, fight_odds_clean_lose, by = c(&quot;Loser&quot
 <h4>Quality Control</h4>
 <p>How much data (# rows) do we lose if compared to fight_odds_clean data frame?</p>
 <pre class="r"><code>nrow(fight_odds_clean) - nrow(event_and_odds )   </code></pre>
-<pre><code>## [1] 51</code></pre>
+<pre><code>## [1] 52</code></pre>
 <p>Which fight dates, if any, did we lose entirely?</p>
 <pre class="r"><code>lost_fight_dates = unique(fight_odds_clean$Date)[!(unique(fight_odds_clean$Date) %in% unique(event_and_odds$Date))]</code></pre>
 <p>Which events do these dates correspond to?</p>
@@ -580,18 +580,19 @@ lost_fights = merge(lost_fight_odds, fight_odds_clean)</code></pre>
 ## 36 2017-12-01               Eddie Alvarez     Justin Gaethje
 ## 37 2017-12-01              Yancy Medeiros      Alex Oliveira
 ## 38 2017-12-30         Michal Oleksiejczuk    Khalil Rountree
-## 39 2018-11-10               Bobby Moffett        Chas Skelly
-## 40 2018-11-24                 Yadong Song    Vincent Morales
-## 41 2018-12-29                 Walt Harris    Andrei Arlovski
-## 42 2019-03-16            Saparbek Safarov   Nick Negumereanu
-## 43 2019-07-13                  John Allan     Mike Rodriguez
-## 44 2019-08-10               Alex da Silva     Rodrigo Vargas
-## 45 2019-08-31                Mizuki Inoue           Yanan Wu
-## 46 2020-02-08              Journey Newson    Domingo Pilarte
-## 47 2020-05-16 Rodrigo Nascimento Ferreira     Don&#39;tale Mayes
-## 48 2020-07-25                Jesse Ronson      Nicolas Dalby
-## 49 2020-08-22                Trevin Jones       Timur Valiev
-## 50 2020-09-12                 Kevin Croom  Roosevelt Roberts</code></pre>
+## 39 2018-06-09                Mike Jackson        Phil Brooks
+## 40 2018-11-10               Bobby Moffett        Chas Skelly
+## 41 2018-11-24                 Yadong Song    Vincent Morales
+## 42 2018-12-29                 Walt Harris    Andrei Arlovski
+## 43 2019-03-16            Saparbek Safarov   Nick Negumereanu
+## 44 2019-07-13                  John Allan     Mike Rodriguez
+## 45 2019-08-10               Alex da Silva     Rodrigo Vargas
+## 46 2019-08-31                Mizuki Inoue           Yanan Wu
+## 47 2020-02-08              Journey Newson    Domingo Pilarte
+## 48 2020-05-16 Rodrigo Nascimento Ferreira     Don&#39;tale Mayes
+## 49 2020-07-25                Jesse Ronson      Nicolas Dalby
+## 50 2020-08-22                Trevin Jones       Timur Valiev
+## 51 2020-09-12                 Kevin Croom  Roosevelt Roberts</code></pre>
 <p><br></p>
 </div>
 <div id="save-data" class="section level4">
@@ -668,35 +669,35 @@ event_and_odds %&gt;%
 <p>Who are these duplicate fighters?</p>
 <pre class="r"><code>fighter_stats[duplicated(fighter_stats$NAME),]</code></pre>
 <pre><code>##                  NAME FighterWeight FighterWeightClass REACH SLPM SAPM STRA
-## 1126       Joey Gomez           155        Lightweight    71 3.73 3.33 0.49
-## 1521     Tony Johnson           265        Heavyweight    NA 2.00 4.73 0.53
-## 2022 Michael McDonald           135       Bantamweight    70 2.69 2.76 0.42
-## 2981      Bruno Silva           185       Middleweight    NA 0.00 0.00 0.00
+## 1131       Joey Gomez           155        Lightweight    71 3.73 3.33 0.49
+## 1527     Tony Johnson           265        Heavyweight    NA 2.00 4.73 0.53
+## 2028 Michael McDonald           135       Bantamweight    70 2.69 2.76 0.42
+## 2988      Bruno Silva           185       Middleweight    NA 0.00 0.00 0.00
 ##      STRD   TD  TDA  TDD SUBA
-## 1126 0.50 2.00 0.28 0.00  0.0
-## 1521 0.31 2.00 0.22 0.00  0.0
-## 2022 0.57 1.09 0.66 0.52  1.4
-## 2981 0.00 0.00 0.00 0.00  0.0</code></pre>
+## 1131 0.50 2.00 0.28 0.00  0.0
+## 1527 0.31 2.00 0.22 0.00  0.0
+## 2028 0.57 1.09 0.66 0.52  1.4
+## 2988 0.00 0.00 0.00 0.00  0.0</code></pre>
 <p>What are the duplicate entries?</p>
 <pre class="r"><code>fighter_stats[fighter_stats$NAME %in% fighter_stats$NAME[duplicated(fighter_stats$NAME)], ]</code></pre>
 <pre><code>##                  NAME FighterWeight FighterWeightClass REACH SLPM SAPM STRA
-## 1124       Joey Gomez           135       Bantamweight    73 2.44 4.46 0.28
-## 1126       Joey Gomez           155        Lightweight    71 3.73 3.33 0.49
-## 1513     Tony Johnson           205  Light Heavyweight    76 4.00 3.67 0.92
-## 1521     Tony Johnson           265        Heavyweight    NA 2.00 4.73 0.53
-## 2020 Michael McDonald           205  Light Heavyweight    NA 0.00 0.40 0.00
-## 2022 Michael McDonald           135       Bantamweight    70 2.69 2.76 0.42
-## 2980      Bruno Silva           125          Flyweight    65 2.60 3.51 0.42
-## 2981      Bruno Silva           185       Middleweight    NA 0.00 0.00 0.00
+## 1129       Joey Gomez           135       Bantamweight    73 2.44 4.46 0.28
+## 1131       Joey Gomez           155        Lightweight    71 3.73 3.33 0.49
+## 1519     Tony Johnson           205  Light Heavyweight    76 4.00 3.67 0.92
+## 1527     Tony Johnson           265        Heavyweight    NA 2.00 4.73 0.53
+## 2026 Michael McDonald           205  Light Heavyweight    NA 0.00 0.40 0.00
+## 2028 Michael McDonald           135       Bantamweight    70 2.69 2.76 0.42
+## 2987      Bruno Silva           125          Flyweight    65 2.60 3.51 0.42
+## 2988      Bruno Silva           185       Middleweight    NA 0.00 0.00 0.00
 ##      STRD   TD  TDA  TDD SUBA
-## 1124 0.55 0.62 1.00 0.50  0.0
-## 1126 0.50 2.00 0.28 0.00  0.0
-## 1513 0.22 0.00 0.00 0.90  0.0
-## 1521 0.31 2.00 0.22 0.00  0.0
-## 2020 0.50 0.00 0.00 0.00  0.0
-## 2022 0.57 1.09 0.66 0.52  1.4
-## 2980 0.55 3.14 0.30 0.61  0.0
-## 2981 0.00 0.00 0.00 0.00  0.0</code></pre>
+## 1129 0.55 0.62 1.00 0.50  0.0
+## 1131 0.50 2.00 0.28 0.00  0.0
+## 1519 0.22 0.00 0.00 0.90  0.0
+## 1527 0.31 2.00 0.22 0.00  0.0
+## 2026 0.50 0.00 0.00 0.00  0.0
+## 2028 0.57 1.09 0.66 0.52  1.4
+## 2987 0.55 3.14 0.30 0.61  0.0
+## 2988 0.00 0.00 0.00 0.00  0.0</code></pre>
 <p>Remove these entries if they have Weight Class mismatches.</p>
 <pre class="r"><code>dup_names = fighter_stats$NAME[duplicated(fighter_stats$NAME)]
 
@@ -776,20 +777,20 @@ current_fighter_stats %&gt;%
 df_current_master[df_current_master$fight_id %in% to_remove_from_master$fight_id,]</code></pre>
 <pre><code>##               NAME       Date                                  Event      City
 ## 9     Alex Caceres 2020-08-29       UFC Fight Night: Smith vs. Rakic Las Vegas
-## 47  Brian Kelleher 2020-09-05     UFC Fight Night: Overeem vs. Sakai Las Vegas
-## 215  Mirsad Bektic 2020-09-19 UFC Fight Night: Covington vs. Woodley Las Vegas
+## 50  Brian Kelleher 2020-09-05     UFC Fight Night: Overeem vs. Sakai Las Vegas
+## 233  Mirsad Bektic 2020-09-19 UFC Fight Night: Covington vs. Woodley Las Vegas
 ##      State Country FightWeightClass Round Method Winner_Odds Loser_Odds  Sex
 ## 9   Nevada     USA    Featherweight     1    SUB        1.54       2.80 Male
-## 47  Nevada     USA    Featherweight     1    SUB        1.28       4.25 Male
-## 215 Nevada     USA    Featherweight     3    SUB        4.05       1.30 Male
+## 50  Nevada     USA    Featherweight     1    SUB        1.28       4.25 Male
+## 233 Nevada     USA    Featherweight     3    SUB        4.05       1.30 Male
 ##     fight_id Result FighterWeight REACH SLPM SAPM STRA STRD   TD  TDA  TDD SUBA
 ## 9         73 Winner           145    73 4.14 2.90 0.49 0.65 0.55 0.76 0.59  0.7
-## 47       371 Winner           145    66 4.48 6.00 0.40 0.53 1.21 0.25 0.76  0.6
-## 215      621  Loser           145    70 2.59 1.89 0.41 0.58 3.32 0.47 0.92  0.5
+## 50       372 Winner           145    66 4.48 6.00 0.40 0.53 1.21 0.25 0.76  0.6
+## 233      623  Loser           145    70 2.59 1.89 0.41 0.58 3.32 0.47 0.92  0.5
 ##     Num_Fights  Data_Date FighterWeightClass
 ## 9           22 2020-08-24      Featherweight
-## 47           9 2020-08-29      Featherweight
-## 215         10 2020-09-18      Featherweight</code></pre>
+## 50           9 2020-08-29      Featherweight
+## 233         10 2020-09-18      Featherweight</code></pre>
 <pre class="r"><code>df_current_master = df_current_master[!(df_current_master$fight_id %in% to_remove_from_master$fight_id),]</code></pre>
 <p><br></p>
 </div>

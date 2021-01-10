@@ -560,8 +560,8 @@ for (i in 1:length(links)){
 
 # stop the clock
 print(proc.time() - ptm)</code></pre>
-<pre><code>##    user  system elapsed 
-## 173.771   4.733 971.481</code></pre>
+<pre><code>##     user   system  elapsed 
+##  175.212    4.780 1009.999</code></pre>
 <p><br></p>
 </div>
 <div id="quality-control" class="section level4">
@@ -572,25 +572,26 @@ print(proc.time() - ptm)</code></pre>
 <pre class="r"><code>excluded_events = unique(c(fighter1_mismatch_event, fighter2_mismatch_event, fighters_mismatch_event))</code></pre>
 <p>The following events were excluded from the analysis.</p>
 <pre class="r"><code>excluded_events</code></pre>
-<pre><code>##  [1] &quot;UFC Vegas 13&quot;                         
-##  [2] &quot;UFC 251&quot;                              
-##  [3] &quot;UFC Fight Night 162&quot;                  
-##  [4] &quot;UFC on ESPN+ 19&quot;                      
-##  [5] &quot;UFC 243&quot;                              
-##  [6] &quot;UFC 239&quot;                              
-##  [7] &quot;UFC on ESPN 3&quot;                        
-##  [8] &quot;UFC Fight Night 145&quot;                  
-##  [9] &quot;UFC on ESPN 1&quot;                        
-## [10] &quot;UFC on ESPN+ 1&quot;                       
-## [11] &quot;UFC Fight Night Sao Paulo&quot;            
-## [12] &quot;UFC 227&quot;                              
-## [13] &quot;UFC on Fox 27&quot;                        
-## [14] &quot;UFC Fight Night 114 Pettis vs. Moreno&quot;
-## [15] &quot;UFC Fight Night 113&quot;                  
-## [16] &quot;UFC 212 Aldo vs Holloway&quot;</code></pre>
+<pre><code>##  [1] &quot;UFC 256&quot;                              
+##  [2] &quot;UFC Vegas 13&quot;                         
+##  [3] &quot;UFC 251&quot;                              
+##  [4] &quot;UFC Fight Night 162&quot;                  
+##  [5] &quot;UFC on ESPN+ 19&quot;                      
+##  [6] &quot;UFC 243&quot;                              
+##  [7] &quot;UFC 239&quot;                              
+##  [8] &quot;UFC on ESPN 3&quot;                        
+##  [9] &quot;UFC Fight Night 145&quot;                  
+## [10] &quot;UFC on ESPN 1&quot;                        
+## [11] &quot;UFC on ESPN+ 1&quot;                       
+## [12] &quot;UFC Fight Night Sao Paulo&quot;            
+## [13] &quot;UFC 227&quot;                              
+## [14] &quot;UFC on Fox 27&quot;                        
+## [15] &quot;UFC Fight Night 114 Pettis vs. Moreno&quot;
+## [16] &quot;UFC Fight Night 113&quot;                  
+## [17] &quot;UFC 212 Aldo vs Holloway&quot;</code></pre>
 <p>Proportion of events excluded from analysis:</p>
 <pre class="r"><code>length(excluded_events) / length(links)</code></pre>
-<pre><code>## [1] 0.05818182</code></pre>
+<pre><code>## [1] 0.06137184</code></pre>
 <p><br></p>
 </div>
 </div>
