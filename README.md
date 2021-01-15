@@ -8,6 +8,9 @@
 ### Social Media
 
 [<img align="left" alt="AttM_stats | Twitter" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/twitter.svg" />][twitter]
+[<img align="left" alt="aggressiontothemean | Instagram" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/instagram.svg" />][instagram]
+
+<br />
 
 ### Motivation
 
@@ -45,3 +48,4 @@ Khabib Nurmegomedov
 
 
 [twitter]: https://twitter.com/AttM_stats
+[instagram]: https://www.instagram.com/aggressiontothemean/
