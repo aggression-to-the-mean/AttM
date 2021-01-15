@@ -3,6 +3,7 @@
 ### Posts
 
 * [Understanding Fight Odds](https://aggression-to-the-mean.github.io/AttM/For-The-People/understanding_fight_odds.html)
+* [How Accurate are Fight Odds?](https://aggression-to-the-mean.github.io/AttM/For-The-People/how_accurate_are_fight_odds.html)
 
 ### Motivation
 
@@ -10,10 +11,9 @@ I love mixed martial arts (MMA) and statistics. Aggression to the Mean (AttM) is
 
 ### Questions
 
-- [How well to vegas odds predict fight outcomes?](https://aggression-to-the-mean.github.io/AttM/For-The-People/understanding_fight_odds.html)
+- [How well to vegas odds predict fight outcomes?](https://aggression-to-the-mean.github.io/AttM/For-The-People/how_accurate_are_fight_odds.html)
 - Does fighter REACH tend to matter?
 - Who are the most underrated fighters?
-- Which fighters have outlying fight stats?
 - Generally, which fight stats predict fighter success? 
 
 ### Tools
