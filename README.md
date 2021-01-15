@@ -1,16 +1,14 @@
 # Aggression to the Mean
 
+[<img align="left" alt="AttM_stats | Twitter" width="66px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/twitter.svg" />][twitter]. 
+[<img align="left" alt="aggressiontothemean | Instagram" width="66px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/instagram.svg" />][instagram]. 
+
+<br>
+
 ### Posts
 
 * [Understanding Fight Odds](https://aggression-to-the-mean.github.io/AttM/For-The-People/understanding_fight_odds.html)
 * [How Accurate are Fight Odds?](https://aggression-to-the-mean.github.io/AttM/For-The-People/how_accurate_are_fight_odds.html)
-
-### Social Media
-
-[<img align="left" alt="AttM_stats | Twitter" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/twitter.svg" />][twitter]
-[<img align="left" alt="aggressiontothemean | Instagram" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/instagram.svg" />][instagram]
-
-<br />
 
 ### Motivation
 
