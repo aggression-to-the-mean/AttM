@@ -1,7 +1,7 @@
 ---
 title: "Understanding Fight Odds"
 author: "Aggression to the Mean"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
+date: "January 09, 2021"
 output:
   prettydoc::html_pretty:
     theme: cayman
@@ -604,9 +604,8 @@ According to [BetMMA.tips](https://www.betmma.tips/mma_betting_favorites_vs_unde
 In a sentence: fight odds are reasonably representative of a fighter's chance of victory and it is difficult to make money betting on UFC fights.  
 
 Admittedly, there is much more nuance to understanding fight odds.  Indeed, my goal is to go into the weeds in future posts by exploring some of the following points:   
-  - How does the performance/accuracy of fight odds vary from year to year?   
-  - What is the relationship between fight odds and the method of victory (e.g. TKO vs. U-DEC)?   
-  - Could you make money by exploiting the apparent bias in the odds?   
+  - [How does the performance/accuracy of fight odds vary from year to year?   
+  - What is the relationship between fight odds and the method of victory (e.g. TKO vs. U-DEC)?](https://aggression-to-the-mean.github.io/AttM/For-The-People/how_accurate_are_fight_odds.html)    
   - How can fight odds be used to predict the outcome of a particular fight?   
   
  <br>
