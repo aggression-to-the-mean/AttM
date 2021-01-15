@@ -487,20 +487,20 @@ method_count_by_odds %>%
 
 method_count_by_odds %>%
   dplyr::filter(Is_Fav == T) %>%
-  ggplot(aes(x=Mid_Bin, y=Method_Prop, group = Dummy, color=Dummy))+
+  ggplot(aes(x=Mid_Bin*100, y=Method_Prop*100, group = Dummy, color=Dummy))+
   geom_point()+
   geom_smooth(se=F)+
-  ylab("Proportion")+
+  ylab("Probability of Method (%)")+
   xlab("Implied Probability (%)")+
   ggtitle("Favorites")+
   labs(color="Method")
 
 method_count_by_odds %>%
   dplyr::filter(Is_Fav == F) %>%
-  ggplot(aes(x=Mid_Bin, y=Method_Prop, group = Dummy, color=Dummy))+
+  ggplot(aes(x=Mid_Bin*100, y=Method_Prop*100, group = Dummy, color=Dummy))+
   geom_point()+
   geom_smooth(se=F)+
-  ylab("Proportion")+
+  ylab("Probability of Method (%)")+
   xlab("Implied Probability (%)")+
   ggtitle("Underdogs")+
   labs(color="Method")
