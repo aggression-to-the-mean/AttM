@@ -42,3 +42,6 @@ Khabib Nurmegomedov
 ### Analysis:
 
 * [Fight Odds Analysis](https://aggression-to-the-mean.github.io/AttM/Analysis/fight_odds_analysis.html)
+
+
+[twitter]: https://twitter.com/AttM_stats
