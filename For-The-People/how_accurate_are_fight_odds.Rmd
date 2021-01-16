@@ -416,7 +416,7 @@ Looking at the Favorites graph, it is clear that favorites grossly underperform 
 
 Sticking with the Favorites, it looks like favorites generally overperform when fights go to Unanimous Decisions (U-DEC). This seems intuitive since the favoured fighter is typically considered the "better" fighter in some holistic sense. Therefore, when the fight goes the distance, they should be more likely to have out-pointed their opponent (even when taking the odds into account).    
 
-Conversely, looking at the Underdogs graph, underdogs may be more likely to overperform than favorites when the fight ends with a finish - TKO or Submission (SUB).  Digging a bit deeper, it seems like moderate underdogs (~35%-40%) overperform when the fight ends in a submission, whereas prohibitive underdogs (<20%) overperform when the fight ends in a KO/TKO. The latter finding palys into our intuition of a "puncher's chance".  
+Conversely, looking at the Underdogs graph, underdogs may be more likely to overperform than favorites when the fight ends with a finish - TKO or Submission (SUB).  Digging a bit deeper, it seems like moderate underdogs (~35%-40%) overperform when the fight ends in a submission, whereas prohibitive underdogs (<20%) overperform when the fight ends in a KO/TKO. The latter finding plays into our intuition of a "puncher's chance".  
 
  <br>
 
