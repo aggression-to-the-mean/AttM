@@ -3,29 +3,20 @@ title: "Understanding Fight Odds"
 author: "Aggression to the Mean"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: md_document 
-# output:
-#   prettydoc::html_pretty:
-#     theme: cayman
-#     highlight: default
 ---
 
 ```{r setup, include=FALSE}
-library(knitr)
-library(stringr)
-library(here)
-# get name of file during knitting and strip file extension
-rmd_filename <- str_remove(knitr::current_input(),"\\.Rmd")
-
 # Figure path on disk = base.dir + fig.path
 # Figure URL online = base.url + fig.path
-knitr::opts_knit$set(base.dir = str_c(here::here(),'/'),base.url='/')
-knitr::opts_chunk$set(fig.path = str_c("rmd_images/",rmd_filename,'/'),echo=TRUE)
+knitr::opts_knit$set(base.dir = "/Users/Shared/AttM/", base.url="/AttM/")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-01-18-understanding_fight_odds/")
 
 # ------
 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, root.dir = "/Users/Shared/AttM")
-setwd("/Users/Shared/AttM")
+# knitr::opts_chunk$set(warning = FALSE, message = FALSE, root.dir = "/Users/Shared/AttM")
+# setwd("/Users/Shared/AttM")
 ```
+
 
  <br>
 
@@ -33,13 +24,12 @@ setwd("/Users/Shared/AttM")
 
 If you are a UFC fight fan, you have likely noticed that the betting odds are often featured prominently in the lead up to a fight.  This page is intended for those who want to better understand what the betting odds signify, how to interpret them, and how well they have predicted fight outcomes in past years.  
 
-After reading this page, you will be able to understand what Jon Anik means when he notes a fighter to be a "prohibitive favourite", and why the commentators react so strongly to big upsets [^1].  
-
-[^1]:  This was a reaction to the Darioush vs. Klose fight.  Darioush was actually the favourite to win here, and did, but you get my point...
+After reading this page, you will be able to understand what Jon Anik means when he notes a fighter to be a "prohibitive favourite", and why the commentators react so strongly to big upsets.  
 
  <br>
 
-![](./images/rogananikdc_reaction.jpg)
+![](/AttM/rmd_images/2021-01-18-understanding_fight_odds/rogananikdc_reaction.jpg)
+ This was a reaction to the Darioush vs. Klose fight.  Darioush was actually the favourite to win here, and did, but you get my point...
  
  <br>
 
@@ -82,23 +72,26 @@ We can use American Odds to derive the exact probability the favorite and underd
 
 The following equation calculates the Implied Probability of the favorite:
 
-$$Implied Probability Of Favorite = -American Odds / (-American Odds + 100)$$
+> Implied Probability Of Favorite = -American Odds / (-American Odds + 100)
 
  <br>
  
 The following equation calculates the Implied Probability of the underdog:
 
-$$Implied Probability Of Underdog = 100/(100 + American Odds)$$
+> Implied Probability Of Underdog = 100/(100 + American Odds)
+
  <br>
 
 Using these equations, we can see that Holloway has about a 62% probability of victory:
 
-$$Implied Probability Of Holloway = -(-160)/(-(-160)+100) = 0.615$$
+> Implied Probability Of Holloway = -(-160)/(-(-160)+100) = 0.615
+
  <br>
 
 Conversely, Kattar appears to have approximately a 42% probability of victory:
 
-$$Implied Probability Of Kattar = 100/(140 + 100) = 0.416$$
+> Implied Probability Of Kattar = 100/(140 + 100) = 0.416
+
 
  <br>
 
@@ -118,9 +111,9 @@ What is meant by "best fight odds"?  Well, if you are betting $100 on an underdo
 
 In our example, as noted above, 5Dimes has Kattar as a +140 underdog. However, according to  [www.bestfightodds.com](https://www.bestfightodds.com/#), Pinnacle lists Kattar at +145. Therefore, if you bet $100 on Kattar with Pinnacle and he wins, you will make \$5 more than you would have if you had placed your bet with 5Dimes.  
 
-Of course, $5 may not seem like much.  However, if you compare Kattar's best odds (+145) with his worst odds (+133 with Interhops), you have a \$12 difference (for a \$100 bet). Moreover, often times, the difference between the best and worst odds for a given fighter can greatly exceed +12 points, especially when dealing with big favorites/underdogs (i.e. larger absolute numbers) [^2].  
+Of course, $5 may not seem like much.  However, if you compare Kattar's best odds (+145) with his worst odds (+133 with Interhops), you have a \$12 difference (for a \$100 bet). Moreover, often times, the difference between the best and worst odds for a given fighter can greatly exceed +12 points, especially when dealing with big favorites/underdogs (i.e. larger absolute numbers).  
 
-[^2]: If you want to build an intuition for this, just spend a bit of time scanning the Moneyline / American Odds for a given UFC event listed on the [www.bestfightodds.com](https://www.bestfightodds.com/#) website.  
+NOTE: If you want to build an intuition for this, just spend a bit of time scanning the Moneyline / American Odds for a given UFC event listed on the [www.bestfightodds.com](https://www.bestfightodds.com/#) website.  
 
 Over the long run, making sure you pick the best odds for your bets can have a big impact.  
 
@@ -201,7 +194,7 @@ df_odds_short %>%
 
 ```
 
-Using data science tools such as web scraping, I have obtained a dataset with fight odds information regarding the majority of the UFC fights that occurred between 2013 and present (for code, see [here](https://github.com/aggression-to-the-mean/AttM/tree/main/Data-Collection)).   
+Using data science tools such as web scraping, I have obtained a dataset with fight odds information regarding the majority of the UFC fights that occurred between 2013 and present.     
 
 ```{r include== F, echo = F}
 nfights = nrow(df_odds_short)
@@ -618,8 +611,8 @@ According to [BetMMA.tips](https://www.betmma.tips/mma_betting_favorites_vs_unde
 In a sentence: fight odds are reasonably representative of a fighter's chance of victory and it is difficult to make money betting on UFC fights.  
 
 Admittedly, there is much more nuance to understanding fight odds.  Indeed, my goal is to go into the weeds in future posts by exploring some of the following points:   
-  - [How does the performance/accuracy of fight odds vary from year to year?   
-  - What is the relationship between fight odds and the method of victory (e.g. TKO vs. U-DEC)?](https://aggression-to-the-mean.github.io/AttM/For-The-People/how_accurate_are_fight_odds.html)    
+  - How does the performance/accuracy of fight odds vary from year to year?   
+  - What is the relationship between fight odds and the method of victory (e.g. TKO vs. U-DEC)?  
   - How can fight odds be used to predict the outcome of a particular fight?   
   
  <br>
