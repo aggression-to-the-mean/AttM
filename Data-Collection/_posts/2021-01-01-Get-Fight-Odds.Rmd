@@ -1,11 +1,17 @@
 ---
 title: "Get Fight Odds"
-output: html_document
+output: md_document
+category: science
 ---
 
 ```{r setup, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, root.dir = "/Users/Shared/AttM")
-setwd("/Users/Shared/AttM")
+# Figure path on disk = base.dir + fig.path
+# Figure URL online = base.url + fig.path
+knitr::opts_knit$set(base.dir = "/Users/Shared/AttM/", base.url="/AttM/")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-01-01-get_fight_odds/")
+
+# knitr::opts_chunk$set(warning = FALSE, message = FALSE, root.dir = "/Users/Shared/AttM") 
+# setwd("/Users/Shared/AttM")
 ```
 
 ## Description

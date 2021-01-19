@@ -1,3 +1,7 @@
+---
+category: arts
+---
+
 <br>
 
 Introduction
