@@ -1,4 +1,4 @@
-# [Aggresion to the Mean](https://aggression-to-the-mean.github.io/AttM/)
+# [Aggression to the Mean](https://aggression-to-the-mean.github.io/AttM/)
 
 [<img align="left" alt="AttM_stats | Twitter" width="66px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/twitter.svg" />][twitter]. 
 [<img align="left" alt="aggressiontothemean | Instagram" width="66px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/instagram.svg" />][instagram]. 
