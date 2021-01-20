@@ -10,7 +10,7 @@ category: arts
 # Figure path on disk = base.dir + fig.path
 # Figure URL online = base.url + fig.path
 knitr::opts_knit$set(base.dir = "/Users/Shared/AttM/", base.url="/AttM/")
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-01-18-understanding_fight_odds/")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-01-20-understanding_fight_odds/")
 
 # ------
 
@@ -29,7 +29,7 @@ After reading this page, you will be able to understand what Jon Anik means when
 
  <br>
 
-![](/AttM/rmd_images/2021-01-18-understanding_fight_odds/rogananikdc_reaction.jpg)
+![](/AttM/rmd_images/2021-01-20-understanding_fight_odds/rogananikdc_reaction.jpg)
  This was a reaction to the Darioush vs. Klose fight.  Darioush was actually the favourite to win here, and did, but you get my point...
  
  <br>
@@ -47,23 +47,47 @@ As a UFC fan, you would probably be used to seeing American Odds.  We will focus
 
 # Understanding American Odds
 
+```{r include = F, echo = F}
+# CHANGE ME
+# change these variables to customize post
+fighter_fav = "Magny"
+odds_fav = "-150"
+
+fighter_dog = "Chiesa"
+odds_dog = "+120"
+
+fight_date = "January 20, 2021"
+
+# other calculations
+num_fav = abs(as.numeric(odds_fav))
+num_dog = as.numeric(odds_dog)
+```
+
+
 American Odds are best understood from the perspective of either earning or betting $100.  
 
-As I write this, Calvin Kattar is slated to fight Max Holloway on January 16, 2021.  
+As I write this, `r fighter_dog` is slated to fight `r fighter_fav` on `r fight_date`.  
 
-According to [www.bestfightodds.com](https://www.bestfightodds.com/#), 5Dimes has Holloway as a -160 favorite over Kattar who is listed as a +140 underdog.  
+According to [www.bestfightodds.com](https://www.bestfightodds.com/#), BetWay has `r fighter_fav` as a `r odds_fav` favorite over `r fighter_dog` who is listed as a `r odds_dog` underdog.  
 
-This means that you need to bet $160 on Holloway to make a \$100 profit.  Conversely, if you bet \$100 on Kattar, you will make a \$140 profit.  
+This means that you need to bet \$`r num_fav` on `r fighter_fav` to make a \$100 profit.  Conversely, if you bet \$100 on `r fighter_dog`, you will make a \$`r num_dog` profit.  
 
-As you can see, your potential earnings are greater if you bet on Kattar.  By definition, this makes Kattar the underdog and implies that Kattar should be less likely to win than Holloway.  
+As you can see, your potential earnings are greater if you bet on `r fighter_dog`.  By definition, this makes `r fighter_dog` the underdog and implies that `r fighter_dog` should be less likely to win than `r fighter_fav`.  
 
 Simply put, the fighter associated with the negative number is the favorite.  The larger the negative number, the more that fighter is favored to win.  
 
-Ok, but now you might be wondering, exactly how likely is Kattar (or Holloway) to win?  To answer that question, we'll have to explore the Implied Probabilities of the American Odds.  
+Ok, but now you might be wondering, exactly how likely is `r fighter_dog` (or `r fighter_fav`) to win?  To answer that question, we'll have to explore the Implied Probabilities of the American Odds.  
 
  <br>
 
 # Implied Probability
+
+```{r include = F, echo = F}
+imp_fav = round((num_fav/(num_fav + 100))*100, 1)
+imp_dog = round((100/(num_dog + 100))*100, 1)
+imp_tot = round(imp_fav + imp_dog, 1)
+imp_over = round(imp_tot - 100, 1)
+```
 
 What exactly does it mean for a fighter to be a favorite?  Well, as discussed, it means that you make less money betting on that fighter than you would betting on the underdog.  But that is not all it means.  More intuitively, it means that the fighter has greater than a 50% probability of winning.  Conversely, the underdog has less than a 50% probability of victory.  
 
@@ -83,50 +107,116 @@ The following equation calculates the Implied Probability of the underdog:
 
  <br>
 
-Using these equations, we can see that Holloway has about a 62% probability of victory:
+Using these equations, we can see that `r fighter_fav` has about a `r imp_fav`% probability of victory:
 
-> Implied Probability Of Holloway = -(-160)/(-(-160)+100) = 0.615
-
- <br>
-
-Conversely, Kattar appears to have approximately a 42% probability of victory:
-
-> Implied Probability Of Kattar = 100/(140 + 100) = 0.416
-
+> Implied Probability Of `r fighter_fav` = `r num_fav`/(`r num_fav`+100) = `r imp_fav`
 
  <br>
 
-At this point, you may have noticed that something is wrong... The Implied Probabilities don't add up to 100%! Indeed, $62\% + 42\% = 104\%$.  
+Conversely, `r fighter_dog` appears to have approximately a `r imp_dog`% probability of victory:
 
-This is by design.  The surplus of percentage points (in this case 4%) is referred to as the overround. 
+> Implied Probability Of `r fighter_dog` = 100/(`r num_dog` + 100) = `r imp_dog`
+
+
+ <br>
+
+At this point, you may have noticed that something is wrong... The Implied Probabilities don't add up to 100%! Indeed, `r imp_fav`% + `r imp_dog`% = `r imp_tot`%.  
+
+This is by design.  The surplus of percentage points (in this case `r imp_over`%) is referred to as the overround. 
 
  <br>
 
 # Overround
 
-The overround guarantees that the oddsmaker (in this case,  5Dimes) turns a profit.  By contrast, the overround makes it more difficult for bettors to earn money, especially in the long run.  As a bettor, the odds are stacked against you.    
+```{r include = F, echo = F}
+# load package
+library(tidyverse)
+library(rvest)
+
+# # Crawl for Fight Odds ----
+# read_html("https://www.bestfightodds.com/") %>%
+#   html_nodes(".table-header a") %>%
+#   html_attr("href") -> url_event_list
+# 
+# # select upcoming fight
+# url_upcoming = paste("https://www.bestfightodds.com", url_event_list[1], sep = "")
+# 
+# # # get BetWay odds 
+# # read_html(url_upcoming) %>%
+# #   html_nodes(".but-sg span") %>%
+# #   html_text()
+# 
+# # get best odds
+# read_html(url_upcoming) %>%
+#   html_nodes(".but-sg .bestbet") %>%
+#   html_text() -> best_odds
+# best_odds = as.numeric(best_odds)
+# 
+# # identify duplicates 
+# best_odds_idx = c(T, diff(best_odds) != 0)
+# 
+# # remove thems
+# best_odds = best_odds[best_odds_idx]
+# 
+# 
+# # get fighters 
+# read_html(url_upcoming) %>%
+#   html_nodes(".t-b-fcc") %>%
+#   html_text() -> fighter_names
+# 
+# # just get one set of ordered names
+# fighter_names = unique(fighter_names)
+# 
+# # create data frame
+# df_odds = data.frame(NAME = fighter_names, best_vegas_odds = best_odds)
+
+#....
+
+# CHANGE ME
+best_fav = "-135"
+best_num_fav = abs(as.numeric(best_fav))
+site_fav = "BetDSI"
+
+best_dog = "+125"
+best_num_dog = as.numeric(best_dog)
+site_dog = "Pinnacle"
+
+worst_dog = "+110"
+worst_num_dog = as.numeric(worst_dog)
+worst_site_dog = "Bet365"
+
+best_vs_worst = best_num_dog - worst_num_dog
+
+extra_dog = best_num_dog - num_dog
+```
+
+The overround guarantees that the oddsmaker (in this case,  BetWay) turns a profit.  By contrast, the overround makes it more difficult for bettors to earn money, especially in the long run.  As a bettor, the odds are stacked against you.    
 
 However, you can overcome most of the disadvantage of the overround by selectively choosing the betting website that provides you with the best fight odds for your particular pick.  
 
 What is meant by "best fight odds"?  Well, if you are betting $100 on an underdog, you will want to place your bet with the website that provides you with the largest positive number because that number describes the profit you could be making.  
 
-In our example, as noted above, 5Dimes has Kattar as a +140 underdog. However, according to  [www.bestfightodds.com](https://www.bestfightodds.com/#), Pinnacle lists Kattar at +145. Therefore, if you bet $100 on Kattar with Pinnacle and he wins, you will make \$5 more than you would have if you had placed your bet with 5Dimes.  
+In our example, as noted above, BetWay has `r fighter_dog` as a `r odds_dog` underdog. However, according to  [www.bestfightodds.com](https://www.bestfightodds.com/#), `r site_dog` lists `r fighter_dog` at `r best_dog`. Therefore, if you bet $100 on `r fighter_dog` with `r site_dog` and he wins, you will make \$`r extra_dog` more than you would have if you had placed your bet with BetWay.  
 
-Of course, $5 may not seem like much.  However, if you compare Kattar's best odds (+145) with his worst odds (+133 with Interhops), you have a \$12 difference (for a \$100 bet). Moreover, often times, the difference between the best and worst odds for a given fighter can greatly exceed +12 points, especially when dealing with big favorites/underdogs (i.e. larger absolute numbers).  
+Of course, \$`r extra_dog` may not seem like much.  However, if you compare the best odds (`r best_dog`) for `r fighter_dog` to the worst odds (`r worst_dog` with `r worst_site_dog`), you have a \$`r best_vs_worst` difference (for a \$100 bet).  
+
+Often times, the difference between the best and worst odds for a given fighter will be larger when dealing with big favorites/underdogs (i.e. larger absolute numbers) than it will be for closer match-ups (i.e. smaller absoluate numbers).    
 
 NOTE: If you want to build an intuition for this, just spend a bit of time scanning the Moneyline / American Odds for a given UFC event listed on the [www.bestfightodds.com](https://www.bestfightodds.com/#) website.  
 
 Over the long run, making sure you pick the best odds for your bets can have a big impact.  
 
  <br>
+ 
+ 
+ | You now have the basic tools required to understand the Vegas Odds for this upcoming UFC event. The remainder of the post focuses on the analysis of historical data of UFC fight odds to understand how underdogs and favorites perform in the long run. |
+|-----------------------------------------|
+
+ <br>
 
 # Dataset - Historical Data of UFC Fight Odds 
 
 ```{r include = F, echo = F}
-## ------------------------------------------------------------------------------------------------------
-library(tidyverse)
-
-
 ## ------------------------------------------------------------------------------------------------------
 load("./Datasets/df_master.RData")
 
@@ -257,7 +347,7 @@ abs_underdog_profit = abs(underdog_profit)
 
 **No.**  
 
-Well, at least not if the past predicts the future... Had you bet 1$ on the underdog of every UFC fight (included in the dataset) you would have lost \$`r abs_underdog_profit`.  Your return on investment (ROI) would have been `r underdog_roi_percent`%.   
+Well, at least not if the past predicts the future... Had you bet $1 on the underdog of every UFC fight (included in the dataset) you would have lost \$`r abs_underdog_profit`.  Your return on investment (ROI) would have been `r underdog_roi_percent`%.   
 
 The below graphs simulate what your cumulative unit profit (profit if you bet $1 per fight) and cumulative ROI would have been had you bet on on the underdog (using the best available odds) for every UFC fight (from the dataset).  
 
@@ -302,7 +392,7 @@ abs_favorite_profit = abs(favorite_profit)
 
 **No.**
 
-Had you bet 1$ on the favorite of every UFC fight you would have lost \$`r abs_favorite_profit`.  Your ROI would have been `r favorite_roi_percent`%.   
+Had you bet $1 on the favorite of every UFC fight you would have lost \$`r abs_favorite_profit`.  Your ROI would have been `r favorite_roi_percent`%.   
 
 The below graphs simulate what your cumulative unit profit and cumulative ROI would have been had you bet on on the favorite for every UFC fight.
 
@@ -583,7 +673,7 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
 
 But what does it mean for the odds to be "accurate"?  
 
-Well, as noted earlier in this post, we can derive Implied Probabilities from fight odds. These probabilities are meant to represent the probability that a given fighter will win. Of course, a given fight only occurs once. For instance, there will be only one winner of the Kattar vs. Holloway contest. We cannot get them to fight 100 times to see how often each of them wins. What we can do, however, is look at how the odds perform across fights. For example, if we look at all the fights for which the Implied Probability of the favorite was between 60-65%, we would expect that the favorite won 60-65% of the time. We can do this for the whole spectrum of Implied Probabilities to gauge the overall accuracy of the Fight Odds.  
+Well, as noted earlier in this post, we can derive Implied Probabilities from fight odds. These probabilities are meant to represent the probability that a given fighter will win. Of course, a given fight only occurs once. For instance, there will be only one winner of the `r fighter_dog` vs. `r fighter_fav` contest. We cannot get them to fight 100 times to see how often each of them wins. What we can do, however, is look at how the odds perform across fights. For example, if we look at all the fights for which the Implied Probability of the favorite was between 60-65%, we would expect that the favorite won 60-65% of the time. We can do this for the whole spectrum of Implied Probabilities to gauge the overall accuracy of the Fight Odds.  
 
 The below graphs showcase this aforementioned spectrum. For both underdogs and favorites, I computed the actual probability of victory of fighters in various ranges of Implied Probabilities.  In common statistical language, we refer to these ranges as "bins". As such, the x coordinate of each black dot is simply the middle point of the bin it represents. The y coordinate is the probability of victory of all the fighters that fell within that bin. The smooth blue curve represents a basic statistical model that tries to fit a curve to the black dots. For our purposes, it gives us a better sense of the trend underlying the black dots.   
 

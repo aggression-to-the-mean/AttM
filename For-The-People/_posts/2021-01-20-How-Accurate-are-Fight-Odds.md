@@ -7,12 +7,13 @@ category: arts
 Introduction
 ============
 
-In a previous post called Understanding Fight Odds, I described what the
-fight odds (specifically American Odds) signify and how to interpret
-them. I also briefly explored the question “Are fight odds accurate?” by
-looking at the relationship between the actual Probability of Victory of
-fighters and the Implied Probability of the fight odds that they were
-given (we’ll review these data later).
+In a another post called [Understanding Fight
+Odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/18/Understanding-Fight-Odds.html),
+I described what the fight odds (specifically American Odds) signify and
+how to interpret them. I also briefly explored the question “Are fight
+odds accurate?” by looking at the relationship between the actual
+Probability of Victory of fighters and the Implied Probability of the
+fight odds that they were given (we’ll review these data later).
 
 I had a smart ass friend point out that the trends found in the average
 relationship between actual Probability of Victory and Implied
@@ -41,12 +42,11 @@ around the time of their fight, as well as the winner of each fight.
 Let’s Review! Are Fight Odds “Accurate”?
 ========================================
 
-The below graphs, analyzed in greater detail in a previous post,
-showcase the relationship between the actual Probability of Victory of
-fighters and the Implied Probability of the fight odds that they were
-given.
+The below graphs, analyzed in greater detail in a another post, showcase
+the relationship between the actual Probability of Victory of fighters
+and the Implied Probability of the fight odds that they were given.
 
-Compared to my previous post, I added a couple graphs that allows us to
+Compared to my another post, I added a couple graphs that allows us to
 look at the same data from a different perspective. I have added graphs
 that represent Over Performance instead of Probability of Victory on the
 y-axis. Over Performance is simply the difference between the black dots
@@ -57,11 +57,11 @@ dotted line, fighters in that odds bin underperformed.
 
 <br>
 
-![](/AttM/rmd_images/2021-01-18-how_accurate_are_fight_odds/unnamed-chunk-3-1.png)![](/AttM/rmd_images/2021-01-18-how_accurate_are_fight_odds/unnamed-chunk-3-2.png)![](/AttM/rmd_images/2021-01-18-how_accurate_are_fight_odds/unnamed-chunk-3-3.png)![](/AttM/rmd_images/2021-01-18-how_accurate_are_fight_odds/unnamed-chunk-3-4.png)
+![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-3-1.png)![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-3-2.png)![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-3-3.png)![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-3-4.png)
 
 <br>
 
-As discussed in a previous post, the odds do a pretty good job of
+As discussed in a another post, the odds do a pretty good job of
 predicting who will win across multiple fights, but do appear to convey
 some bias whereby underdogs overperform in close match-ups whereas
 favorites overperform in disperate pairings.
@@ -87,7 +87,7 @@ data look much nicer / smoother.
 
 <br>
 
-![](/AttM/rmd_images/2021-01-18-how_accurate_are_fight_odds/unnamed-chunk-4-1.png)![](/AttM/rmd_images/2021-01-18-how_accurate_are_fight_odds/unnamed-chunk-4-2.png)
+![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-4-1.png)![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-4-2.png)
 
 <br>
 
@@ -159,7 +159,7 @@ chance”.
 
 <br>
 
-![](/AttM/rmd_images/2021-01-18-how_accurate_are_fight_odds/unnamed-chunk-5-1.png)![](/AttM/rmd_images/2021-01-18-how_accurate_are_fight_odds/unnamed-chunk-5-2.png)
+![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-5-1.png)![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-5-2.png)
 
 <br>
 
@@ -191,7 +191,7 @@ of victory look a bit different:
 
 <br>
 
-![](/AttM/rmd_images/2021-01-18-how_accurate_are_fight_odds/unnamed-chunk-6-1.png)![](/AttM/rmd_images/2021-01-18-how_accurate_are_fight_odds/unnamed-chunk-6-2.png)
+![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-6-1.png)![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-6-2.png)
 
 <br>
 

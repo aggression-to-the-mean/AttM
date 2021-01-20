@@ -19,7 +19,7 @@ the commentators react so strongly to big upsets.
 
 <br>
 
-![](/AttM/rmd_images/2021-01-18-understanding_fight_odds/rogananikdc_reaction.jpg)
+![](/AttM/rmd_images/2021-01-20-understanding_fight_odds/rogananikdc_reaction.jpg)
 This was a reaction to the Darioush vs. Klose fight. Darioush was
 actually the favourite to win here, and did, but you get my point…
 
@@ -44,26 +44,25 @@ Understanding American Odds
 American Odds are best understood from the perspective of either earning
 or betting $100.
 
-As I write this, Calvin Kattar is slated to fight Max Holloway on
-January 16, 2021.
+As I write this, Chiesa is slated to fight Magny on January 20, 2021.
 
 According to [www.bestfightodds.com](https://www.bestfightodds.com/#),
-5Dimes has Holloway as a -160 favorite over Kattar who is listed as a
-+140 underdog.
+BetWay has Magny as a -150 favorite over Chiesa who is listed as a +120
+underdog.
 
-This means that you need to bet $160 on Holloway to make a $100 profit.
-Conversely, if you bet $100 on Kattar, you will make a $140 profit.
+This means that you need to bet $150 on Magny to make a $100 profit.
+Conversely, if you bet $100 on Chiesa, you will make a $120 profit.
 
 As you can see, your potential earnings are greater if you bet on
-Kattar. By definition, this makes Kattar the underdog and implies that
-Kattar should be less likely to win than Holloway.
+Chiesa. By definition, this makes Chiesa the underdog and implies that
+Chiesa should be less likely to win than Magny.
 
 Simply put, the fighter associated with the negative number is the
 favorite. The larger the negative number, the more that fighter is
 favored to win.
 
-Ok, but now you might be wondering, exactly how likely is Kattar (or
-Holloway) to win? To answer that question, we’ll have to explore the
+Ok, but now you might be wondering, exactly how likely is Chiesa (or
+Magny) to win? To answer that question, we’ll have to explore the
 Implied Probabilities of the American Odds.
 
 <br>
@@ -101,32 +100,32 @@ underdog:
 
 <br>
 
-Using these equations, we can see that Holloway has about a 62%
-probability of victory:
+Using these equations, we can see that Magny has about a 60% probability
+of victory:
 
-> Implied Probability Of Holloway = -(-160)/(-(-160)+100) = 0.615
+> Implied Probability Of Magny = 150/(150+100) = 60
 
 <br>
 
-Conversely, Kattar appears to have approximately a 42% probability of
+Conversely, Chiesa appears to have approximately a 45.5% probability of
 victory:
 
-> Implied Probability Of Kattar = 100/(140 + 100) = 0.416
+> Implied Probability Of Chiesa = 100/(120 + 100) = 45.5
 
 <br>
 
 At this point, you may have noticed that something is wrong… The Implied
-Probabilities don’t add up to 100%! Indeed, 62% + 42% = 104%.
+Probabilities don’t add up to 100%! Indeed, 60% + 45.5% = 105.5%.
 
-This is by design. The surplus of percentage points (in this case 4%) is
-referred to as the overround.
+This is by design. The surplus of percentage points (in this case 5.5%)
+is referred to as the overround.
 
 <br>
 
 Overround
 =========
 
-The overround guarantees that the oddsmaker (in this case, 5Dimes) turns
+The overround guarantees that the oddsmaker (in this case, BetWay) turns
 a profit. By contrast, the overround makes it more difficult for bettors
 to earn money, especially in the long run. As a bettor, the odds are
 stacked against you.
@@ -140,19 +139,21 @@ underdog, you will want to place your bet with the website that provides
 you with the largest positive number because that number describes the
 profit you could be making.
 
-In our example, as noted above, 5Dimes has Kattar as a +140 underdog.
+In our example, as noted above, BetWay has Chiesa as a +120 underdog.
 However, according to
 [www.bestfightodds.com](https://www.bestfightodds.com/#), Pinnacle lists
-Kattar at +145. Therefore, if you bet $100 on Kattar with Pinnacle and
+Chiesa at +125. Therefore, if you bet $100 on Chiesa with Pinnacle and
 he wins, you will make $5 more than you would have if you had placed
-your bet with 5Dimes.
+your bet with BetWay.
 
-Of course, $5 may not seem like much. However, if you compare Kattar’s
-best odds (+145) with his worst odds (+133 with Interhops), you have a
-$12 difference (for a $100 bet). Moreover, often times, the difference
-between the best and worst odds for a given fighter can greatly exceed
-+12 points, especially when dealing with big favorites/underdogs
-(i.e. larger absolute numbers).
+Of course, $5 may not seem like much. However, if you compare the best
+odds (+125) for Chiesa to the worst odds (+110 with Bet365), you have a
+$15 difference (for a $100 bet).
+
+Often times, the difference between the best and worst odds for a given
+fighter will be larger when dealing with big favorites/underdogs
+(i.e. larger absolute numbers) than it will be for closer match-ups
+(i.e. smaller absoluate numbers).
 
 NOTE: If you want to build an intuition for this, just spend a bit of
 time scanning the Moneyline / American Odds for a given UFC event listed
@@ -160,6 +161,21 @@ on the [www.bestfightodds.com](https://www.bestfightodds.com/#) website.
 
 Over the long run, making sure you pick the best odds for your bets can
 have a big impact.
+
+<br>
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>You now have the basic tools required to understand the Vegas Odds for this upcoming UFC event. The remainder of the post focuses on the analysis of historical data of UFC fight odds to understand how underdogs and favorites perform in the long run.</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
 
 <br>
 
@@ -193,7 +209,7 @@ average overround of just under 1%.
 
 <br>
 
-![](/AttM/rmd_images/2021-01-18-understanding_fight_odds/unnamed-chunk-3-1.png)
+![](/AttM/rmd_images/2021-01-20-understanding_fight_odds/unnamed-chunk-6-1.png)
 
 <br>
 
@@ -201,7 +217,7 @@ average overround of just under 1%.
 
 **No.**
 
-Well, at least not if the past predicts the future… Had you bet 1$ on
+Well, at least not if the past predicts the future… Had you bet $1 on
 the underdog of every UFC fight (included in the dataset) you would have
 lost $6.21. Your return on investment (ROI) would have been -0.21%.
 
@@ -214,14 +230,14 @@ For my money, there does not appear to be any trend in the data…
 
 <br>
 
-![](/AttM/rmd_images/2021-01-18-understanding_fight_odds/unnamed-chunk-5-1.png)![](/AttM/rmd_images/2021-01-18-understanding_fight_odds/unnamed-chunk-5-2.png)
+![](/AttM/rmd_images/2021-01-20-understanding_fight_odds/unnamed-chunk-8-1.png)![](/AttM/rmd_images/2021-01-20-understanding_fight_odds/unnamed-chunk-8-2.png)
 <br>
 
 ### Will I make money if I always bet on the favorite instead?
 
 **No.**
 
-Had you bet 1$ on the favorite of every UFC fight you would have lost
+Had you bet $1 on the favorite of every UFC fight you would have lost
 $66.48. Your ROI would have been -2.29%.
 
 The below graphs simulate what your cumulative unit profit and
@@ -230,7 +246,7 @@ UFC fight.
 
 <br>
 
-![](/AttM/rmd_images/2021-01-18-understanding_fight_odds/unnamed-chunk-7-1.png)![](/AttM/rmd_images/2021-01-18-understanding_fight_odds/unnamed-chunk-7-2.png)
+![](/AttM/rmd_images/2021-01-20-understanding_fight_odds/unnamed-chunk-10-1.png)![](/AttM/rmd_images/2021-01-20-understanding_fight_odds/unnamed-chunk-10-2.png)
 
 <br>
 
@@ -253,8 +269,8 @@ But what does it mean for the odds to be “accurate”?
 Well, as noted earlier in this post, we can derive Implied Probabilities
 from fight odds. These probabilities are meant to represent the
 probability that a given fighter will win. Of course, a given fight only
-occurs once. For instance, there will be only one winner of the Kattar
-vs. Holloway contest. We cannot get them to fight 100 times to see how
+occurs once. For instance, there will be only one winner of the Chiesa
+vs. Magny contest. We cannot get them to fight 100 times to see how
 often each of them wins. What we can do, however, is look at how the
 odds perform across fights. For example, if we look at all the fights
 for which the Implied Probability of the favorite was between 60-65%, we
@@ -292,7 +308,7 @@ interpretation.
 
 <br>
 
-![](/AttM/rmd_images/2021-01-18-understanding_fight_odds/unnamed-chunk-9-1.png)![](/AttM/rmd_images/2021-01-18-understanding_fight_odds/unnamed-chunk-9-2.png)
+![](/AttM/rmd_images/2021-01-20-understanding_fight_odds/unnamed-chunk-12-1.png)![](/AttM/rmd_images/2021-01-20-understanding_fight_odds/unnamed-chunk-12-2.png)
 
 <br>
 

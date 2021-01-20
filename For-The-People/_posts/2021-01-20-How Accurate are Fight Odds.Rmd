@@ -10,7 +10,7 @@ category: arts
 # Figure path on disk = base.dir + fig.path
 # Figure URL online = base.url + fig.path
 knitr::opts_knit$set(base.dir = "/Users/Shared/AttM/", base.url="/AttM/")
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-01-18-how_accurate_are_fight_odds/")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-01-20-how_accurate_are_fight_odds/")
 
 # ------
 
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2
 
 # Introduction
 
-In a previous post called Understanding Fight Odds, I described what the fight odds (specifically American Odds) signify and how to interpret them. I also briefly explored the question "Are fight odds accurate?" by looking at the relationship between the actual Probability of Victory of fighters and the Implied Probability of the fight odds that they were given (we'll review these data later).  
+In a another post called [Understanding Fight Odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/18/Understanding-Fight-Odds.html), I described what the fight odds (specifically American Odds) signify and how to interpret them. I also briefly explored the question "Are fight odds accurate?" by looking at the relationship between the actual Probability of Victory of fighters and the Implied Probability of the fight odds that they were given (we'll review these data later).  
 
 I had a smart ass friend point out that the trends found in the average relationship between actual Probability of Victory and Implied Probability may break down if we look at the relationships on a smaller time frame (e.g. year-to-year). This is actually a great point and will be, in part, the focus of this post.  Specifically, I will look at how the performance of the odds varies across years and across methods of victory (i.e. TKO, Decision, etc.).   
 
@@ -362,9 +362,9 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
 
 ```
 
-The below graphs, analyzed in greater detail in a previous post, showcase the relationship between the actual Probability of Victory of fighters and the Implied Probability of the fight odds that they were given.  
+The below graphs, analyzed in greater detail in a another post, showcase the relationship between the actual Probability of Victory of fighters and the Implied Probability of the fight odds that they were given.  
 
-Compared to my previous post, I added a couple graphs that allows us to look at the same data from a different perspective. I have added graphs that represent Over Performance instead of Probability of Victory on the y-axis. Over Performance is simply the difference between the black dots (or the blue lines) and the diagonal dotted line from the Probability of Victory graphs. If a black dot is above the dotted line, fighters in that odds bin overperformed. Conversely, if a balck dot is below the dotted line, fighters in that odds bin underperformed.  
+Compared to my another post, I added a couple graphs that allows us to look at the same data from a different perspective. I have added graphs that represent Over Performance instead of Probability of Victory on the y-axis. Over Performance is simply the difference between the black dots (or the blue lines) and the diagonal dotted line from the Probability of Victory graphs. If a black dot is above the dotted line, fighters in that odds bin overperformed. Conversely, if a balck dot is below the dotted line, fighters in that odds bin underperformed.  
 
  <br>
 
@@ -374,7 +374,7 @@ var_null = gauge_over_performance(num_bin = 10, min_bin_size = 100, variable = N
 
  <br>
  
-As discussed in a previous post, the odds do a pretty good job of predicting who will win across multiple fights, but do appear to convey some bias whereby underdogs overperform in close match-ups whereas favorites overperform in disperate pairings. 
+As discussed in a another post, the odds do a pretty good job of predicting who will win across multiple fights, but do appear to convey some bias whereby underdogs overperform in close match-ups whereas favorites overperform in disperate pairings. 
  
 Now, let's break down the Over Performance graphs by year to see if the aforementioned bias holds...
 
