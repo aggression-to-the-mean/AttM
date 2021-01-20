@@ -25,20 +25,6 @@ I love mixed martial arts (MMA) and statistics. Aggression to the Mean (AttM) is
 
 Khabib Nurmegomedov 
 
-# Code 
-
-### Data Collection:
-
-* [Get Current Fighter Stats](https://aggression-to-the-mean.github.io/AttM/Data-Collection/get_current_fighter_stats.html)
-* [Get Fighter Stats](https://aggression-to-the-mean.github.io/AttM/Data-Collection/get_fighter_stats.html)
-* [Get UFC Event Info](https://aggression-to-the-mean.github.io/AttM/Data-Collection/get_event_info.html)
-* [Get Fight Odds](https://aggression-to-the-mean.github.io/AttM/Data-Collection/get_fight_odds.html)
-* [Combine Scrapped Data](https://aggression-to-the-mean.github.io/AttM/Data-Collection/combine_scraped_data.html)
-
-### Analysis:
-
-* [Fight Odds Analysis](https://aggression-to-the-mean.github.io/AttM/Analysis/fight_odds_analysis.html)
-
 
 [twitter]: https://twitter.com/AttM_stats
 [instagram]: https://www.instagram.com/aggressiontothemean/
