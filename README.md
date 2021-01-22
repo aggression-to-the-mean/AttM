@@ -2,6 +2,8 @@
 
 [<img align="left" alt="AttM_stats | Twitter" width="66px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/twitter.svg" />][twitter]. 
 [<img align="left" alt="aggressiontothemean | Instagram" width="66px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/instagram.svg" />][instagram]. 
+[<img align="left" alt="aggressiontothemean | Youtube" width="66px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/youtube.svg" />][youtube]. 
+
 
 <br>
 
@@ -21,3 +23,4 @@ Khabib Nurmegomedov
 
 [twitter]: https://twitter.com/AttM_stats
 [instagram]: https://www.instagram.com/aggressiontothemean/
+[youtube]: https://www.youtube.com/channel/UC0uVn1nq5HRWLrdMHHJxIsQ 
