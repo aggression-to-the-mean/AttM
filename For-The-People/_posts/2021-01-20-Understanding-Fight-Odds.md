@@ -19,12 +19,6 @@ the commentators react so strongly to big upsets.
 
 <br>
 
-![](/AttM/rmd_images/2021-01-20-understanding_fight_odds/rogananikdc_reaction.jpg)
-This was a reaction to the Darioush vs. Klose fight. Darioush was
-actually the favourite to win here, and did, but you get my point…
-
-<br>
-
 Types of Betting Odds
 =====================
 

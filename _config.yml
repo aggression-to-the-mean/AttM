@@ -32,8 +32,8 @@ github_username:  aggression-to-the-mean
 # fields that were not defaulted
 author: AttM
 instagram_username: aggressiontothemean
-# I am trying to figure out how to point to my youtube page!!!
-# youtube_username: 0uVn1nq5HRWLrdMHHJxIsQ
+# the below does not work and I am not sure why... Perhaps I need more views! 
+youtube_username: https://www.youtube.com/channel/UC0uVn1nq5HRWLrdMHHJxIsQ  
 
 
 # title logo is a new field

@@ -14,7 +14,7 @@ I am hoping to use data analytics to answer the following questions:
 * Do other fight stats (strikes landed per minute, etc.) matter?   
 * How well can we predict fight outcomes by putting relevant factors (fight stats, odds, etc.) into a statistical model?  
 
-I am also hoping to start publishing short YouTube videos to breakdown and communciate some of the more technical information found on this webpage.  You are a fight fan - you don't care about fancy stats...  What the hell does all of this mean!?
+I have also started publishing short [YouTube videos](https://www.youtube.com/channel/UC0uVn1nq5HRWLrdMHHJxIsQ) to breakdown and communciate some of the more technical information found on this webpage.  You are a fight fan - you don't care about fancy stats...  What the hell does all of this mean!?
 
 ### For Nerds
 
