@@ -1,0 +1,303 @@
+---
+title: "Under and Over Rated Fighters"
+author: "Aggression to the Mean"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: md_document
+category: arts
+---
+
+```{r setup, include=FALSE}
+# Figure path on disk = base.dir + fig.path
+# Figure URL online = base.url + fig.path
+knitr::opts_knit$set(base.dir = "/Users/Shared/AttM/", base.url="/AttM/")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-01-26-under_rated_fighters/")
+
+# ------
+
+# knitr::opts_chunk$set(warning = FALSE, message = FALSE, root.dir = "/Users/Shared/AttM")
+# setwd("/Users/Shared/AttM")
+```
+
+
+ <br>
+
+## Introduction
+
+In previous posts, we've explored [how to understand fight odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/20/Understanding-Fight-Odds.html) and described the [accuracy of UFC fight odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/20/How-Accurate-are-Fight-Odds.html). It is natural to then wonder how well the fight odds have predicted the performance of particular fighters.  
+
+The purpose of this post is to identify some of the most Under Rated fighters in the UFC.   
+
+<br> 
+
+# Defining "Under Rated"
+
+Before we can address the above question, it is critical that we define some key terms. For starters, what does it mean for a fighter to be Under Rated? To answer that question, let's recall how we assessed the overall accuracy of the odds: we examined if the favorites (or underdogs) won at a rate similar to what would have been expected by the Implied Probability of their odds.    
+
+We can use a similar logic to assess the Over Performance of particular fighters. If a fighter wins at a greater rate than the average Implied Probability of their odds, then they are overperforming relative to the odds. If a fighter is overperforming, then they have been Under Rated by the odds.  
+
+<br> 
+
+# Dataset - Historical Data of UFC Fight Odds 
+
+```{r include = F, echo = F}
+# packages
+library(tidyverse)
+library(knitr)
+
+## ------------------------------------------------------------------------------------------------------
+load("./Datasets/df_master.RData")
+
+
+## ------------------------------------------------------------------------------------------------------
+summary(df_master)
+
+
+## ------------------------------------------------------------------------------------------------------
+df_master$NAME = as.factor(df_master$NAME)
+df_master$Date = as.Date(df_master$Date)
+df_master$Event = as.factor(df_master$Event)
+df_master$City= as.factor(df_master$City)
+df_master$State = as.factor(df_master$State)
+df_master$Country = as.factor(df_master$Country)
+df_master$FightWeightClass = as.factor(df_master$FightWeightClass)
+df_master$Method = as.factor(df_master$Method)
+df_master$Winner_Odds = as.numeric(df_master$Winner_Odds)
+df_master$Loser_Odds = as.numeric(df_master$Loser_Odds)
+df_master$fight_id = as.factor(df_master$fight_id)
+df_master$Sex = as.factor(df_master$Sex)
+df_master$Result = as.factor(df_master$Result)
+df_master$FighterWeightClass = as.factor(df_master$FighterWeightClass)
+
+## ------------------------------------------------------------------------------------------------------
+df_odds = df_master
+rm(df_master)
+
+
+## ------------------------------------------------------------------------------------------------------
+df_odds %>%
+  dplyr::filter(
+    (Method != "DQ") & (Method != "Overturned")
+    , is.finite(Winner_Odds)
+    , is.finite(Loser_Odds)
+  ) -> df_odds
+
+
+## ------------------------------------------------------------------------------------------------------
+df_odds %>%
+  dplyr::select(-c(FighterWeight:SUBA)) %>%
+  spread(Result, NAME) -> df_odds_short
+
+## ------------------------------------------------------------------------------------------------------
+df_odds_short %>%
+  dplyr::filter(Winner_Odds != Loser_Odds) %>%  # filter out equal odds
+  dplyr::mutate(
+    Favorite_was_Winner = ifelse(Winner_Odds < Loser_Odds, T, F)
+    , Favorite_Unit_Profit = ifelse(Favorite_was_Winner, Winner_Odds - 1, -1)
+    , Underdog_Unit_Profit = ifelse(!Favorite_was_Winner, Winner_Odds - 1, -1)
+  ) -> df_odds_short
+
+## ------------------------------------------------------------------------------------------------------
+df_odds_short %>% dplyr::mutate(
+  Favorite_Probability = ifelse(Favorite_was_Winner, 1/Winner_Odds, 1/Loser_Odds)
+  , Underdog_Probability = ifelse(!Favorite_was_Winner,  1/Winner_Odds, 1/Loser_Odds)
+) -> df_odds_short
+
+
+## ------------------------------------------------------------------------------------------------------
+df_odds_short %>%
+  dplyr::mutate(
+    Total_Probability = Favorite_Probability + Underdog_Probability
+    , Overround = Total_Probability - 1
+  ) -> df_odds_short
+
+```
+
+Using data science tools such as web scraping, I have obtained a dataset with fight odds information regarding the majority of the UFC fights that occurred between 2013 and present.     
+
+```{r include = F, echo = F}
+nfights = nrow(df_odds_short)
+nevents = length(unique(df_odds_short$Event))
+earliest_date = format(min(df_odds_short$Date), '%B %d, %Y')
+latest_date = format(max(df_odds_short$Date), '%B %d, %Y')
+```
+
+In particular, the dataset consists of `r nfights` UFC fights from `r nevents` UFC events, spanning from `r earliest_date` to `r latest_date`.  
+
+Among other things, the dataset lists the best odds for each fighter around the time of their fight, as well as the winner of each fight.  
+
+ <br>
+ 
+| **NOTE:** Some of the tables below are based on the fight data contained in the dataset described above. Although the dataset captures a large proportion of UFC events and fights since 2013, it is not exhaustive. Therefore, I will do manual searches to retrieve additional data regarding the fighters in question, to provide a more comprehensive picture this fighter-specific odds information.  |
+|-----------------------------------------|
+
+ <br>
+
+## Under Rated Fighters
+
+The below table lists the top 10 Under Rated fighters, in the dataset, with at least 5 UFC fights. These fighters are listed in order of Over Performance, which is simply the Actual Rate of Victory subtracted by Average Implied Probabilities of the odds.   
+
+ <br>
+
+```{r include = T, echo = F}
+df_odds %>% dplyr::select(
+  c(
+    NAME
+    , Event
+    , Date
+    , Result
+    , Winner_Odds
+    , Loser_Odds
+  )
+) -> df_odds_long
+
+df_odds_long %>%
+  dplyr::mutate(
+    Fighter_Odds = ifelse(Result == "Winner", Winner_Odds, Loser_Odds)
+  ) -> df_odds_long
+
+df_odds_long %>%
+  dplyr::mutate(
+    Implied_Probability = 1/Fighter_Odds
+    , Won = ifelse(Result == "Winner", T, F)
+    , Logit_Prob = qlogis(Implied_Probability)
+  ) -> df_odds_long
+
+df_odds_long %>%
+  dplyr::group_by(NAME) %>%
+  dplyr::summarise(
+    N_Fights = length(Won)
+    , Exp_Prop = round(mean(Implied_Probability),2)*100
+    , Logit_Exp_Prop = mean(Logit_Prob)
+    , Win_Prop = round(mean(Won),2)*100
+    , Over_Performance = round(Win_Prop - Exp_Prop,0)
+    , Logit_Over = qlogis(Win_Prop) - Logit_Exp_Prop
+    , Back_Trans_Exp = plogis(Logit_Exp_Prop)
+  ) -> df_odds_long_fighters
+
+df_odds_long_fighters %>%
+  dplyr::filter(N_Fights >= 5) %>%
+  dplyr::select(NAME:Over_Performance, -Logit_Exp_Prop) %>%
+  dplyr::arrange(desc(Over_Performance)) %>%
+  head(10) -> df_top_over_perform
+
+kable(df_top_over_perform
+      , caption = "Top 10 Under Rated Fighters with at least 5 Fights"
+      , col.names = c(
+        "Fighter Name"
+        , "Number of Fights"
+        , "Average Implied Probability (%)"
+        , "Actual Rate of Victory (%)"
+        , "Over Performance (%)"
+        )
+      )  
+
+```
+
+ <br>
+
+Since the dataset is not exhaustive, I will guide you through some additional, manual checks to get a more comprehensive overview of a particular fighter's relationship with the odds.  
+
+The odds in the dataset are derived from the [BetMMA.tips website](https://www.betmma.tips/). However, for the manual checks, we will query the [BestFightOdds website](https://www.bestfightodds.com/) for the missing odds information. The best fight odds acquired from these two sources should be sufficiently similar for our purposes.   
+
+We will also verify a fighter's UFC history via the [UFC's site] (https://www.ufc.com/athletes/all/active). 
+
+ <br>
+
+# Leonardo Santos
+
+The below table displays the Leonardo Santos fights that are included in the dataset.  
+
+ <br>
+
+```{r include = T, echo = F}
+df_odds_long %>%
+  dplyr::filter(NAME == "Leonardo Santos") %>%
+  dplyr::select(NAME:Result, Implied_Probability) %>%
+  dplyr::mutate(Implied_Probability = round(Implied_Probability * 100)) %>%
+  dplyr::arrange(Date) -> df_leo
+
+kable(df_leo
+      , caption = sprintf("%s Fights Included in the Dataset", unique(df_leo$NAME))
+      , col.names = c(
+        "Fighter Name"
+        , "Event"
+        , "Date"
+        , "Result"
+        , "Implied Probability (%)"
+       )
+      )
+```
+
+ <br>
+
+According to the UFC website, [Leonardo Santos](https://www.ufc.com/athlete/leonardo-santos) also had the following fights:  
+
+| Date       | Result     |  Opponent     | 
+| :------------- | :----------: | ----------: |
+|  2013-06-08   | Winner   |     Macario     |
+|  2014-03-23   | Majority Draw   |   Parke   |
+
+
+The odds information regarding the Macario fight does not appear to be available on [BestFightOdds](https://www.bestfightodds.com/fighters/Leonardo-Santos-1213). However, since Santos won, we will disregard that fight. We will also ignore the draw (though Santos happened to be the underdog).  
+
+**Therefore, based on Santos' last 5 fights, he has overperformed, relative to the odds, by a whopping 56%. Put another way, the odds only gave Santos a 1% probability of winning all 5 fights.**
+
+ <br>
+ 
+# Robert Whittaker
+
+The below table displays the Robert Whittaker fights that are included in the dataset. 
+
+
+```{r include = T, echo = F}
+df_odds_long %>%
+  dplyr::filter(NAME == "Robert Whittaker") %>%
+  dplyr::select(NAME:Result, Implied_Probability) %>%
+  dplyr::mutate(Implied_Probability = round(Implied_Probability * 100)) %>%
+  dplyr::arrange(Date) -> df_rob
+
+kable(df_rob
+      , caption = sprintf("%s Fights Included in the Dataset", unique(df_rob$NAME))
+      , col.names = c(
+        "Fighter Name"
+        , "Event"
+        , "Date"
+        , "Result"
+        , "Implied Probability (%)"
+       )
+      )
+```
+
+ <br>
+
+According to the UFC website, [Robert Whittaker](https://www.ufc.com/athlete/robert-whittaker) also had the following fights (odds retrieved from [BestFightOdds](https://www.bestfightodds.com/fighters/Robert-Whittaker-3761#)):  
+
+| Date       | Result     | Decimal Odds     | Implied Probability (%)  | Over Performance (%) |
+| :------------- | :----------: | :-----------: | :-------------: | ----------: | 
+|  2012-12-14   | Winner   |      1.43        |          70        |            30        | 
+|  2013-08-28   | Loss     |      1.63        |          61        |           **-**61      | 
+|  2014-02-22   | Loss     |      2.22        |          45        |           **-**45      | 
+|  2014-06-28   | Win     |      1.41        |          71        |           29       |
+|  2014-11-07   | Win     |      2.71        |          37        |           63      |
+|  2019-10-05   | Loss     |      2.20        |          45        |           **-**45       |
+
+ <br>
+ 
+By taking a weighted average of (i) the average Over Performance for the 6 fights above (i.e. -4.8%) and (ii) the average Over Performance of the 10 fights in the dataset (i.e. 50%), we come to about 29%.   
+ 
+**Therefore, in Whittaker's 16 fight UFC career, he has overperformed, relative to the odds, by about 29%.**  
+
+ <br>
+ 
+
+## Conclusion
+
+In this post, I identified a couple of the most Under Rated fighters on the UFC roster. By doing the same manual checks as me, you could go down the list of the top 10 overperformers from the data set and calculate the actual UFC Over Performance stats for the fighters not covered in this post.  
+
+I intend calculate the Over Performance stats for additional UFC fighters and ammend this post.  
+
+In future posts, I may explore additional fighter-specific odds information such as:  
+- Most Over Rated fighters  
+- Least and Most Valued fighters (regardless of performance)    
+
+
