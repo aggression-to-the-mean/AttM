@@ -2,7 +2,6 @@
 category: arts
 ---
 
-
 <br>
 
 Introduction
@@ -450,17 +449,137 @@ relative to the odds, by about 29%.**
 
 <br>
 
+Alexander Volkanovski
+=====================
+
+The below table displays the Alexander Volkanovski Fights fights that
+are included in the dataset.
+
+<table style="width:100%;">
+<caption>Alexander Volkanovski Fights Included in the Dataset</caption>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 37%" />
+<col style="width: 10%" />
+<col style="width: 6%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Fighter Name</th>
+<th style="text-align: left;">Event</th>
+<th style="text-align: left;">Date</th>
+<th style="text-align: left;">Result</th>
+<th style="text-align: right;">Implied Probability (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Alexander Volkanovski</td>
+<td style="text-align: left;">UFC Fight Night: Whittaker vs. Brunson</td>
+<td style="text-align: left;">2016-11-26</td>
+<td style="text-align: left;">Winner</td>
+<td style="text-align: right;">64</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alexander Volkanovski</td>
+<td style="text-align: left;">UFC Fight Night: Lewis vs. Hunt</td>
+<td style="text-align: left;">2017-06-10</td>
+<td style="text-align: left;">Winner</td>
+<td style="text-align: right;">83</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Alexander Volkanovski</td>
+<td style="text-align: left;">UFC Fight Night: Werdum vs. Tybura</td>
+<td style="text-align: left;">2017-11-18</td>
+<td style="text-align: left;">Winner</td>
+<td style="text-align: right;">85</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alexander Volkanovski</td>
+<td style="text-align: left;">UFC 221: Romero vs. Rockhold</td>
+<td style="text-align: left;">2018-02-10</td>
+<td style="text-align: left;">Winner</td>
+<td style="text-align: right;">57</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Alexander Volkanovski</td>
+<td style="text-align: left;">UFC Fight Night: Dos Santos vs. Ivanov</td>
+<td style="text-align: left;">2018-07-14</td>
+<td style="text-align: left;">Winner</td>
+<td style="text-align: right;">68</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alexander Volkanovski</td>
+<td style="text-align: left;">UFC 232: Jones vs. Gustafsson 2</td>
+<td style="text-align: left;">2018-12-29</td>
+<td style="text-align: left;">Winner</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Alexander Volkanovski</td>
+<td style="text-align: left;">UFC 237: Namajunas vs. Andrade</td>
+<td style="text-align: left;">2019-05-11</td>
+<td style="text-align: left;">Winner</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alexander Volkanovski</td>
+<td style="text-align: left;">UFC 245: Usman vs. Covington</td>
+<td style="text-align: left;">2019-12-14</td>
+<td style="text-align: left;">Winner</td>
+<td style="text-align: right;">36</td>
+</tr>
+</tbody>
+</table>
+
+<br>
+
+According to the UFC website, [Alexander
+Volkanovski](https://www.ufc.com/athlete/alexander-volkanovski) also had
+the following fights (odds retrieved from
+[BestFightOdds](https://www.bestfightodds.com/fighters/Alexander-Volkanovski-9523):
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Date</th>
+<th style="text-align: center;">Result</th>
+<th style="text-align: center;">Decimal Odds</th>
+<th style="text-align: center;">Implied Probability (%)</th>
+<th style="text-align: right;">Over Performance (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2020-07-11</td>
+<td style="text-align: center;">Winner</td>
+<td style="text-align: center;">1.53</td>
+<td style="text-align: center;">65</td>
+<td style="text-align: right;">35</td>
+</tr>
+</tbody>
+</table>
+
+<br>
+
+By taking a weighted average of (i) the average Over Performance for the
+one fight above (i.e. 35%) and (ii) the average Over Performance of the
+8 fights in the dataset (i.e. 40%), we come to about 39%.
+
+**Therefore, in Volkanovki’s 9 fight UFC career, he has overperformed,
+relative to the odds, by a staggering 39%.**
+
+<br>
+
 Conclusion
 ----------
 
-In this post, I identified a couple of the most Under Rated fighters on
-the UFC roster. By doing the same manual checks as me, you could go down
-the list of the top 10 overperformers from the data set and calculate
-the actual UFC Over Performance stats for the fighters not covered in
-this post.
-
-I intend calculate the Over Performance stats for additional UFC
-fighters and ammend this post.
+In this post, I identified a few of the most Under Rated fighters on the
+UFC roster. By doing the same manual checks as I did, you could go down
+the list of the top 10 overperformers from the dataset and calculate the
+actual UFC Over Performance stats for the fighters not covered in this
+post.
 
 In future posts, I may explore additional fighter-specific odds
 information such as:  

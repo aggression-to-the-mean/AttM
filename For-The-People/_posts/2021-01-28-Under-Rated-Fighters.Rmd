@@ -289,15 +289,54 @@ By taking a weighted average of (i) the average Over Performance for the 6 fight
 
  <br>
  
+# Alexander Volkanovski 
+
+The below table displays the Alexander Volkanovski Fights fights that are included in the dataset. 
+
+
+```{r include = T, echo = F}
+df_odds_long %>%
+  dplyr::filter(NAME == "Alexander Volkanovski") %>%
+  dplyr::select(NAME:Result, Implied_Probability) %>%
+  dplyr::mutate(Implied_Probability = round(Implied_Probability * 100)) %>%
+  dplyr::arrange(Date) -> df_volko
+
+kable(df_volko
+      , caption = sprintf("%s Fights Included in the Dataset", unique(df_volko$NAME))
+      , col.names = c(
+        "Fighter Name"
+        , "Event"
+        , "Date"
+        , "Result"
+        , "Implied Probability (%)"
+       )
+      )
+```
+
+ <br>
+
+According to the UFC website, [Alexander Volkanovski](https://www.ufc.com/athlete/alexander-volkanovski) also had the following fights (odds retrieved from [BestFightOdds](https://www.bestfightodds.com/fighters/Alexander-Volkanovski-9523):  
+
+| Date       | Result     | Decimal Odds     | Implied Probability (%)  | Over Performance (%) |
+| :------------- | :----------: | :-----------: | :-------------: | ----------: | 
+|  2020-07-11   | Winner   |      1.53        |          65        |            35        | 
+
+ <br>
+ 
+By taking a weighted average of (i) the average Over Performance for the one fight above (i.e. 35%) and (ii) the average Over Performance of the 8 fights in the dataset (i.e. 40%), we come to about 39%.   
+ 
+**Therefore, in Volkanovki's 9 fight UFC career, he has overperformed, relative to the odds, by a staggering 39%.**  
+
+ <br>
+
+
 
 ## Conclusion
 
-In this post, I identified a couple of the most Under Rated fighters on the UFC roster. By doing the same manual checks as me, you could go down the list of the top 10 overperformers from the data set and calculate the actual UFC Over Performance stats for the fighters not covered in this post.  
-
-I intend calculate the Over Performance stats for additional UFC fighters and ammend this post.  
+In this post, I identified a few of the most Under Rated fighters on the UFC roster. By doing the same manual checks as I did, you could go down the list of the top 10 overperformers from the dataset and calculate the actual UFC Over Performance stats for the fighters not covered in this post.
 
 In future posts, I may explore additional fighter-specific odds information such as:  
 - Most Over Rated fighters  
-- Least and Most Valued fighters (regardless of performance)    
-
+- Least and Most Valued fighters (regardless of performance)  
+ 
 
