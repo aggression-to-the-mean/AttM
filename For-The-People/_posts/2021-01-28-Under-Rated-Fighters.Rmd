@@ -1,5 +1,5 @@
 ---
-title: "Under and Over Rated Fighters"
+title: "Under Rated Fighters"
 author: "Aggression to the Mean"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: md_document
@@ -10,7 +10,7 @@ category: arts
 # Figure path on disk = base.dir + fig.path
 # Figure URL online = base.url + fig.path
 knitr::opts_knit$set(base.dir = "/Users/Shared/AttM/", base.url="/AttM/")
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-01-26-under_rated_fighters/")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-01-28-under_rated_fighters/")
 
 # ------
 
@@ -237,7 +237,8 @@ According to the UFC website, [Leonardo Santos](https://www.ufc.com/athlete/leon
 |  2013-06-08   | Winner   |     Macario     |
 |  2014-03-23   | Majority Draw   |   Parke   |
 
-
+ <br>
+ 
 The odds information regarding the Macario fight does not appear to be available on [BestFightOdds](https://www.bestfightodds.com/fighters/Leonardo-Santos-1213). However, since Santos won, we will disregard that fight. We will also ignore the draw (though Santos happened to be the underdog).  
 
 **Therefore, based on Santos' last 5 fights, he has overperformed, relative to the odds, by a whopping 56%. Put another way, the odds only gave Santos a 1% probability of winning all 5 fights.**
@@ -275,11 +276,11 @@ According to the UFC website, [Robert Whittaker](https://www.ufc.com/athlete/rob
 | Date       | Result     | Decimal Odds     | Implied Probability (%)  | Over Performance (%) |
 | :------------- | :----------: | :-----------: | :-------------: | ----------: | 
 |  2012-12-14   | Winner   |      1.43        |          70        |            30        | 
-|  2013-08-28   | Loss     |      1.63        |          61        |           **-**61      | 
-|  2014-02-22   | Loss     |      2.22        |          45        |           **-**45      | 
-|  2014-06-28   | Win     |      1.41        |          71        |           29       |
-|  2014-11-07   | Win     |      2.71        |          37        |           63      |
-|  2019-10-05   | Loss     |      2.20        |          45        |           **-**45       |
+|  2013-08-28   | Loser     |      1.63        |          61        |           **-**61      | 
+|  2014-02-22   | Loser     |      2.22        |          45        |           **-**45      | 
+|  2014-06-28   | Winner     |      1.41        |          71        |           29       |
+|  2014-11-07   | Winner     |      2.71        |          37        |           63      |
+|  2019-10-05   | Loser     |      2.20        |          45        |           **-**45       |
 
  <br>
  
