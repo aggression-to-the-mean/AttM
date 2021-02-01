@@ -1,14 +1,10 @@
----
-category: arts
----
-
 <br>
 
 Introduction
 ============
 
 In a another post called [Understanding Fight
-Odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/18/Understanding-Fight-Odds.html),
+Odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/01/Understanding-Fight-Odds.html),
 I described what the fight odds (specifically American Odds) signify and
 how to interpret them. I also briefly explored the question “Are fight
 odds accurate?” by looking at the relationship between the actual
@@ -31,8 +27,8 @@ Using data science tools such as web scraping, I have obtained a dataset
 with fight odds information regarding the majority of the UFC fights
 that occurred between 2013 and present.
 
-In particular, the dataset consists of 2905 UFC fights from 258 UFC
-events, spanning from April 27, 2013 to December 19, 2020.
+In particular, the dataset consists of 2929 UFC fights from 260 UFC
+events, spanning from April 27, 2013 to January 20, 2021.
 
 Among other things, the dataset lists the best odds for each fighter
 around the time of their fight, as well as the winner of each fight.
@@ -57,7 +53,7 @@ dotted line, fighters in that odds bin underperformed.
 
 <br>
 
-![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-3-1.png)![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-3-2.png)![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-3-3.png)![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-3-4.png)
+![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-3-1.png)![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-3-2.png)![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-3-3.png)![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-3-4.png)
 
 <br>
 
@@ -87,7 +83,7 @@ data look much nicer / smoother.
 
 <br>
 
-![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-4-1.png)![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-4-2.png)
+![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-4-1.png)![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-4-2.png)
 
 <br>
 
@@ -159,7 +155,7 @@ chance”.
 
 <br>
 
-![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-5-1.png)![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-5-2.png)
+![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-5-1.png)![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-5-2.png)
 
 <br>
 
@@ -191,7 +187,7 @@ of victory look a bit different:
 
 <br>
 
-![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-6-1.png)![](/AttM/rmd_images/2021-01-20-how_accurate_are_fight_odds/unnamed-chunk-6-2.png)
+![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-6-1.png)![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-6-2.png)
 
 <br>
 
