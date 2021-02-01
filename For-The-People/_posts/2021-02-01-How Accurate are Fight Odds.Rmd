@@ -22,7 +22,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2
 
 # Introduction
 
-In a another post called [Understanding Fight Odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/01/Understanding-Fight-Odds.html), I described what the fight odds (specifically American Odds) signify and how to interpret them. I also briefly explored the question "Are fight odds accurate?" by looking at the relationship between the actual Probability of Victory of fighters and the Implied Probability of the fight odds that they were given (we'll review these data later).  
+In a another post called [Understanding Fight Odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/2021/02/01/Understanding-Fight-Odds.html), I described what the fight odds (specifically American Odds) signify and how to interpret them. I also briefly explored the question "Are fight odds accurate?" by looking at the relationship between the actual Probability of Victory of fighters and the Implied Probability of the fight odds that they were given (we'll review these data later).  
 
 I had a smart ass friend point out that the trends found in the average relationship between actual Probability of Victory and Implied Probability may break down if we look at the relationships on a smaller time frame (e.g. year-to-year). This is actually a great point and will be, in part, the focus of this post.  Specifically, I will look at how the performance of the odds varies across years and across methods of victory (i.e. TKO, Decision, etc.).   
 

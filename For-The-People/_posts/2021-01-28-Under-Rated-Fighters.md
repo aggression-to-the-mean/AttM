@@ -8,9 +8,9 @@ Introduction
 ------------
 
 In previous posts, we’ve explored [how to understand fight
-odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/20/Understanding-Fight-Odds.html)
+odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/01/Understanding-Fight-Odds.html)
 and described the [accuracy of UFC fight
-odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/20/How-Accurate-are-Fight-Odds.html).
+odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/01/How-Accurate-are-Fight-Odds.html).
 It is natural to then wonder how well the fight odds have predicted the
 performance of particular fighters.
 

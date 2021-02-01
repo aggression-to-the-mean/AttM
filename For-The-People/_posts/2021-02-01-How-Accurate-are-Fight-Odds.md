@@ -1,10 +1,14 @@
+---
+category: arts
+---
+
 <br>
 
 Introduction
 ============
 
 In a another post called [Understanding Fight
-Odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/01/Understanding-Fight-Odds.html),
+Odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/2021/02/01/Understanding-Fight-Odds.html),
 I described what the fight odds (specifically American Odds) signify and
 how to interpret them. I also briefly explored the question “Are fight
 odds accurate?” by looking at the relationship between the actual
