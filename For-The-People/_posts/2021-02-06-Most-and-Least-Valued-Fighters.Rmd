@@ -1,0 +1,236 @@
+---
+title: "Most and Least Valued Fighters"
+author: "Aggression to the Mean"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: md_document
+category: arts
+---
+
+```{r setup, include=FALSE}
+# Figure path on disk = base.dir + fig.path
+# Figure URL online = base.url + fig.path
+knitr::opts_knit$set(base.dir = "/Users/Shared/AttM/", base.url="/AttM/")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-02-06-over_rated_fighters/")
+
+# ------
+
+# knitr::opts_chunk$set(warning = FALSE, message = FALSE, root.dir = "/Users/Shared/AttM")
+# setwd("/Users/Shared/AttM")
+```
+
+
+ <br>
+
+## Introduction
+
+In previous posts, we identified some of the UFC's most [Under Rated](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/28/Under-Rated-Fighters.html) and [Over Rated](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/29/Over-Rated-Fighters.html) fighters by examining the extent to which they had underperformed or overperformed relative to the odds.  
+
+The purpose of this post is to identify the most and least valued fighters, regardless of performance. In other words, which fighters have had reliably favorable or unfavorable fight odds?  
+
+<br> 
+
+# Defining Most and Least Valued
+
+These terms are more straightforward than Over and Under Rated. The Most Valued fighters are simply those with the highest average Implied Probability of winning, based on the odds.  Conversely, the Least Valued fighters are those with the lowest average Implied Probability of winning.  
+
+With the above definitions, it does not matter how the fighters actually performed. We are only interested in how the oddsmakers viewed them.  
+
+<br> 
+
+# Dataset - Historical Data of UFC Fight Odds 
+
+```{r include = F, echo = F}
+# packages
+library(tidyverse)
+library(knitr)
+
+## ------------------------------------------------------------------------------------------------------
+load("./Datasets/df_master.RData")
+
+
+## ------------------------------------------------------------------------------------------------------
+summary(df_master)
+
+
+## ------------------------------------------------------------------------------------------------------
+df_master$NAME = as.factor(df_master$NAME)
+df_master$Date = as.Date(df_master$Date)
+df_master$Event = as.factor(df_master$Event)
+df_master$City= as.factor(df_master$City)
+df_master$State = as.factor(df_master$State)
+df_master$Country = as.factor(df_master$Country)
+df_master$FightWeightClass = as.factor(df_master$FightWeightClass)
+df_master$Method = as.factor(df_master$Method)
+df_master$Winner_Odds = as.numeric(df_master$Winner_Odds)
+df_master$Loser_Odds = as.numeric(df_master$Loser_Odds)
+df_master$fight_id = as.factor(df_master$fight_id)
+df_master$Sex = as.factor(df_master$Sex)
+df_master$Result = as.factor(df_master$Result)
+df_master$FighterWeightClass = as.factor(df_master$FighterWeightClass)
+
+## ------------------------------------------------------------------------------------------------------
+df_odds = df_master
+rm(df_master)
+
+
+## ------------------------------------------------------------------------------------------------------
+df_odds %>%
+  dplyr::filter(
+    (Method != "DQ") & (Method != "Overturned")
+    , is.finite(Winner_Odds)
+    , is.finite(Loser_Odds)
+  ) -> df_odds
+
+
+## ------------------------------------------------------------------------------------------------------
+df_odds %>%
+  dplyr::select(-c(FighterWeight:SUBA)) %>%
+  spread(Result, NAME) -> df_odds_short
+
+## ------------------------------------------------------------------------------------------------------
+df_odds_short %>%
+  dplyr::filter(Winner_Odds != Loser_Odds) %>%  # filter out equal odds
+  dplyr::mutate(
+    Favorite_was_Winner = ifelse(Winner_Odds < Loser_Odds, T, F)
+    , Favorite_Unit_Profit = ifelse(Favorite_was_Winner, Winner_Odds - 1, -1)
+    , Underdog_Unit_Profit = ifelse(!Favorite_was_Winner, Winner_Odds - 1, -1)
+  ) -> df_odds_short
+
+## ------------------------------------------------------------------------------------------------------
+df_odds_short %>% dplyr::mutate(
+  Favorite_Probability = ifelse(Favorite_was_Winner, 1/Winner_Odds, 1/Loser_Odds)
+  , Underdog_Probability = ifelse(!Favorite_was_Winner,  1/Winner_Odds, 1/Loser_Odds)
+) -> df_odds_short
+
+
+## ------------------------------------------------------------------------------------------------------
+df_odds_short %>%
+  dplyr::mutate(
+    Total_Probability = Favorite_Probability + Underdog_Probability
+    , Overround = Total_Probability - 1
+  ) -> df_odds_short
+
+```
+
+Using data science tools such as web scraping, I have obtained a dataset with fight odds information regarding the majority of the UFC fights that occurred between 2013 and present.     
+
+```{r include = F, echo = F}
+nfights = nrow(df_odds_short)
+nevents = length(unique(df_odds_short$Event))
+earliest_date = format(min(df_odds_short$Date), '%B %d, %Y')
+latest_date = format(max(df_odds_short$Date), '%B %d, %Y')
+```
+
+In particular, the dataset consists of `r nfights` UFC fights from `r nevents` UFC events, spanning from `r earliest_date` to `r latest_date`.  
+
+Among other things, the dataset lists the best odds for each fighter around the time of their fight, as well as the winner of each fight.  
+
+ <br>
+ 
+| **NOTE:** Some of the tables below are based on the fight data contained in the dataset described above. Although the dataset captures a large proportion of UFC events and fights since 2013, it is not exhaustive.   |
+|-----------------------------------------|
+
+ <br>
+
+## Most Valued Fighters
+
+The below table lists the top 10 Most Valued fighters, in the dataset, with at least 5 UFC fights. These fighters are listed in order of the Average Implied Probabilities of the odds.  
+
+There are no real surprises below. Many of the fighters on the list are widely considered to be among the most dominant fighters (and champions) of their time.  
+
+Demetrious Johnson stands out as having an astonishing Average Implied Probability of 87%, based on 9 of his many UFC fights.  
+
+ <br>
+
+```{r include = T, echo = F}
+df_odds %>% dplyr::select(
+  c(
+    NAME
+    , Event
+    , Date
+    , Result
+    , Winner_Odds
+    , Loser_Odds
+  )
+) -> df_odds_long
+
+df_odds_long %>%
+  dplyr::mutate(
+    Fighter_Odds = ifelse(Result == "Winner", Winner_Odds, Loser_Odds)
+  ) -> df_odds_long
+
+df_odds_long %>%
+  dplyr::mutate(
+    Implied_Probability = 1/Fighter_Odds
+    , Won = ifelse(Result == "Winner", T, F)
+    , Logit_Prob = qlogis(Implied_Probability)
+  ) -> df_odds_long
+
+df_odds_long %>%
+  dplyr::group_by(NAME) %>%
+  dplyr::summarise(
+    N_Fights = length(Won)
+    , Exp_Prop = round(mean(Implied_Probability),2)*100
+    , Logit_Exp_Prop = mean(Logit_Prob)
+    , Win_Prop = round(mean(Won),2)*100
+    , Under_Performance = -1*round(Win_Prop - Exp_Prop,0)
+    , Logit_Over = qlogis(Win_Prop) - Logit_Exp_Prop
+    , Back_Trans_Exp = plogis(Logit_Exp_Prop)
+  ) -> df_odds_long_fighters
+
+df_odds_long_fighters %>%
+  dplyr::filter(N_Fights >= 5) %>%
+  dplyr::select(NAME:Exp_Prop) %>%
+  dplyr::arrange(desc(Exp_Prop)) %>%
+  head(10) -> df_most_valued
+
+kable(df_most_valued
+      , caption = "Top 10 Most Valued Fighters with at least 5 Fights"
+      , col.names = c(
+        "Fighter Name"
+        , "Number of Fights"
+        , "Average Implied Probability (%)"
+        )
+      )  
+
+```
+
+ <br>
+
+As mentioned in the disclaimer box above, these findings are not complete. For example, Jon Jones obviously has many more than 7 fights. However, the list above should still give a reasonably representative estimate of how heavily these top tier fighters are favored.  
+
+If you are interested in getting a fuller picture of any particular fighter's history with the odds, you can likely get additional information from the [Best Fight Odds website](https://www.bestfightodds.com/).  
+
+ <br>
+
+## Least Valued
+
+The below table lists the top 10 Least Valued fighters, in the dataset, with at least 5 UFC fights. These fighters are listed in reverse order of the Average Implied Probabilities of the odds.   
+
+The one fighter that stands out from the below list is Roxanne Modafferi, mainly because she has been active as of late. There is a popular narrative that Modafferi is not highly valued by the odds makers so it is no surprise that she makes her way towards the top of this list.   
+
+As for Dan Henderson, the only reason he made it to the list is likely because the dataset captured some fights towards the end of his career (post 2013). I would imagine that the odds for Hendo would be much more favorable earlier in his career, when he was in his prime.  
+
+```{r include = T, echo = F}
+df_odds_long_fighters %>%
+  dplyr::filter(N_Fights >= 5) %>%
+  dplyr::select(NAME:Exp_Prop) %>%
+  dplyr::arrange(Exp_Prop) %>%
+  head(10) -> df_least_valued
+
+kable(df_least_valued
+      , caption = "Top 10 Least Valued Fighters with at least 5 Fights"
+      , col.names = c(
+        "Fighter Name"
+        , "Number of Fights"
+        , "Average Implied Probability (%)"
+        )
+      )  
+
+```
+
+ <br>
+
+## Conclusion
+
+The lists of Most and Least valued fighters are interesting mostly because they tend to match our intuitions fairly well. Fighters that lose fairly frequently but not enough to be let go by the UFC, tend not to be highly valued based on the odds. Conversely, well-known dominant fighters (especially champions) tend to be highly valued by the odds - how could they not be!?  
