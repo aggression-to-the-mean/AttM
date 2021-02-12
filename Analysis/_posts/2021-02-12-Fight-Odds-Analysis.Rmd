@@ -10,9 +10,9 @@ category: science
 # Figure path on disk = base.dir + fig.path
 # Figure URL online = base.url + fig.path
 knitr::opts_knit$set(base.dir = "/Users/Shared/AttM/", base.url="/AttM/")
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-01-21-fight_odds_analysis/")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-02-12-fight_odds_analysis/")
 
-# ------
+
 
 # knitr::opts_chunk$set(warning = FALSE, message = FALSE, root.dir = "/Users/Shared/AttM")
 # setwd("/Users/Shared/AttM")
@@ -188,7 +188,7 @@ mean(df_odds_short$Total_Probability)
 
  <br>
    
-#### Odds performance
+#### Odds Performance
 
 Add year as variable. 
 
@@ -199,15 +199,33 @@ df_odds_short %>%
   ) -> df_odds_short
 ```
 
-Create function to graphically assess over performance as a function of several variables.  These are not inferential analyses but are instead meant to visualize the data to observe trends for further analysis. 
+Compute Adjusted Implied Probability to account for the overround and get an unbiased estimate of the probability of victory implied by the odds.  
+
+```{r}
+df_odds_short %>%
+  dplyr::mutate(
+    Adjusted_Favorite_Probability = Favorite_Probability - Overround/2
+    , Adjusted_Underdog_Probability = Underdog_Probability - Overround/2
+    , Adjusted_Total_Probability = Adjusted_Favorite_Probability + Adjusted_Underdog_Probability
+  ) -> df_odds_short
+```
+
+Looking at summary, we see that Adjusted Total Probability is always equal to 100%. Moreover, the Favorite Probability never dips below 50%, whereas the Underdog Probability never exceeds it.  
+
+```{r}
+summary(df_odds_short)
+```
+
+
+Create function to graphically assess over performance as a function of several variables.  These are not inferential analyses but are instead meant to visualize the data to observe trends for further analysis. Use adjusted implied probabilities along with unit profits derived from non-adjusted odds to simulate what one actually would have won using best available odds.  
 
 ```{r}
 gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NULL) {
 
   # get bins for Favorite
-  df_odds_short$Favorite_Probability_Bin = cut(df_odds_short$Favorite_Probability, num_bin)
+  df_odds_short$Favorite_Probability_Bin = cut(df_odds_short$Adjusted_Favorite_Probability, num_bin)
   # get bins for Underdog
-  df_odds_short$Underdog_Probability_Bin = cut(df_odds_short$Underdog_Probability, num_bin)
+  df_odds_short$Underdog_Probability_Bin = cut(df_odds_short$Adjusted_Underdog_Probability, num_bin)
 
   if (is.null(variable)) {
     # check over/under performance for Favorites
@@ -261,7 +279,7 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
       geom_smooth(se=F)+
       geom_hline(yintercept = 0, linetype = "dotted")+
       ylab("Over Performance (%)")+
-      xlab("Expected Probability (%)")+
+      xlab("Adjusted Implied Probability (%)")+
       ggtitle("Favorites")->gg
     print(gg)
 
@@ -272,7 +290,7 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
       geom_point()+
       geom_smooth(se=F)+
       ylab("Probability of Victory (%)")+
-      xlab("Expected Probability (%)")+
+      xlab("Adjusted Implied Probability (%)")+
       geom_abline(slope=1, intercept=0, linetype = "dotted")+
       ggtitle("Favorites")->gg
     print(gg)
@@ -285,7 +303,7 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
       geom_smooth(se=F)+
       geom_hline(yintercept = 0, linetype = "dotted")+
       ylab("ROI (%)")+
-      xlab("Expected Probability (%)")+
+      xlab("Adjusted Implied Probability (%)")+
       ggtitle("Favorites") -> gg
     print(gg)
 
@@ -298,7 +316,7 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
       geom_smooth(se=F)+
       geom_hline(yintercept = 0, linetype = "dotted")+
       ylab("Over Performance (%)")+
-      xlab("Expected Probability (%)")+
+      xlab("Adjusted Implied Probability (%)")+
       ggtitle("Favorites")+
       labs(color=sprintf("%s", variable)) -> gg
     print(gg)
@@ -311,7 +329,7 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
       geom_smooth(se=F)+
       geom_hline(yintercept = 0, linetype = "dotted")+
       ylab("ROI (%)")+
-      xlab("Expected Probability (%)")+
+      xlab("Adjusted Implied Probability (%)")+
       ggtitle("Favorites")+
       labs(color=sprintf("%s", variable)) -> gg
     print(gg)
@@ -366,7 +384,7 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
       geom_smooth(se=F)+
       geom_hline(yintercept = 0, linetype = "dotted")+
       ylab("Over Performance (%)")+
-      xlab("Expected Probability (%)")+
+      xlab("Adjusted Implied Probability (%)")+
       ggtitle("Underdogs")->gg
     print(gg)
 
@@ -377,7 +395,7 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
       geom_point()+
       geom_smooth(se=F)+
       ylab("Probability of Victory (%)")+
-      xlab("Expected Probability (%)")+
+      xlab("Adjusted Implied Probability (%)")+
       geom_abline(slope=1, intercept=0, linetype = "dotted")+
       ggtitle("Underdogs")->gg
     print(gg)
@@ -389,7 +407,7 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
       geom_smooth(se=F)+
       geom_hline(yintercept = 0, linetype = "dotted")+
       ylab("ROI (%)")+
-      xlab("Expected Probability (%)")+
+      xlab("Adjusted Implied Probability (%)")+
       ggtitle("Underdogs")-> gg
     print(gg)
 
@@ -403,7 +421,7 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
       geom_smooth(se=F)+
       geom_hline(yintercept = 0, linetype = "dotted")+
       ylab("Over Performance (%)")+
-      xlab("Expected Probability (%)")+
+      xlab("Adjusted Implied Probability (%)")+
       ggtitle("Underdogs")+
       labs(color=sprintf("%s", variable)) -> gg
     print(gg)
@@ -415,7 +433,7 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
       geom_smooth(se=F)+
       geom_hline(yintercept = 0, linetype = "dotted")+
       ylab("ROI (%)")+
-      xlab("Expected Probability (%)")+
+      xlab("Adjusted Implied Probability (%)")+
       ggtitle("Underdogs")+
       labs(color=sprintf("%s", variable)) -> gg
     print(gg)
@@ -465,7 +483,7 @@ odds_perf_by_method %>%
   geom_point()+
   geom_smooth(se=F)+
   ylab("Count")+
-  xlab("Implied Probability (%)")+
+  xlab("Adjusted Implied Probability (%)")+
   ggtitle("Favorites")+
   labs(color="Method")
 
@@ -475,7 +493,7 @@ odds_perf_by_method %>%
   geom_point()+
   geom_smooth(se=F)+
   ylab("Count")+
-  xlab("Implied Probability (%)")+
+  xlab("Adjusted Implied Probability (%)")+
   ggtitle("Underdogs")+
   labs(color="Method")
 ```
@@ -501,7 +519,7 @@ method_count_by_odds %>%
   geom_point()+
   geom_smooth(se=F)+
   ylab("Probability of Method (%)")+
-  xlab("Implied Probability (%)")+
+  xlab("Adjusted Implied Probability (%)")+
   ggtitle("Favorites")+
   labs(color="Method")
 
@@ -511,7 +529,7 @@ method_count_by_odds %>%
   geom_point()+
   geom_smooth(se=F)+
   ylab("Probability of Method (%)")+
-  xlab("Implied Probability (%)")+
+  xlab("Adjusted Implied Probability (%)")+
   ggtitle("Underdogs")+
   labs(color="Method")
 ```
@@ -521,55 +539,93 @@ method_count_by_odds %>%
 
 #### Fighter Odds 
 
+Convert short back to long format.  
+
+```{r}
+df_odds_short %>%
+  gather(key = "Result", value = "NAME", Loser:Winner) -> df_odds_long
+```
+
+Identify if fighter was favortie to assign proper Implied Probability.   
+
+```{r}
+df_odds_long %>%
+  dplyr::mutate(
+  Was_Favorite = ifelse(
+    (Favorite_was_Winner & (Result == "Winner")) | (!Favorite_was_Winner & (Result == "Loser"))
+    , T
+    , F
+  )
+) -> df_odds_long
+
+summary(df_odds_long[, "Was_Favorite"])
+```
+
+Identify Implied Probability of each fighter.  
+
+```{r}
+df_odds_long %>%
+  dplyr::mutate(
+    Implied_Probability = ifelse(
+      Was_Favorite
+      , Favorite_Probability
+      , Underdog_Probability
+    )
+    , Adjusted_Implied_Probability = ifelse(
+      Was_Favorite
+      , Adjusted_Favorite_Probability
+      , Adjusted_Underdog_Probability
+    )
+  ) -> df_odds_long
+
+summary(df_odds_long[,c("Implied_Probability", "Adjusted_Implied_Probability")])
+```
+
+
 Get rid of useless columns. 
 
 ```{r}
-df_odds %>% dplyr::select(
+df_odds_long %>% dplyr::select(
   c(
     NAME
     , Event
     , Date
     , Result
-    , Winner_Odds
-    , Loser_Odds
+    , Implied_Probability
+    , Adjusted_Implied_Probability
   )
 ) -> df_odds_long
 ```
 
-Summarize data.
+Summarize data.  
 
 ```{r}
 summary(df_odds_long)
 ```
 
-Add Fighter Odds column.
+
+Add Win and Log Odds columns.     
 
 ```{r}
 df_odds_long %>%
   dplyr::mutate(
-    Fighter_Odds = ifelse(Result == "Winner", Winner_Odds, Loser_Odds)
-  ) -> df_odds_long
-```
-
-Add Implied Probability column.  
-
-```{r}
-df_odds_long %>%
-  dplyr::mutate(
-    Implied_Probability = 1/Fighter_Odds
-    , Won = ifelse(Result == "Winner", T, F)
+    Won = ifelse(Result == "Winner", T, F)
     , Logit_Prob = qlogis(Implied_Probability)
+    , Adjusted_Logit_Prob = qlogis(Adjusted_Implied_Probability)
   ) -> df_odds_long
+
+summary(df_odds_long[, c("Won", "Logit_Prob", "Adjusted_Logit_Prob")])
 ```
 
-Get performance and odds.
+
+Get performance and odds for each fighter using Adjusted Implied Probability.  
 
 ```{r}
 df_odds_long %>%
   dplyr::group_by(NAME) %>%
   dplyr::summarise(
-    Exp_Prop = mean(Implied_Probability)
-    , Logit_Exp_Prop = mean(Logit_Prob)
+    Exp_Prop = mean(Adjusted_Implied_Probability)
+    , Logit_Exp_Prop = mean(Adjusted_Logit_Prob)
     , Win_Prop = mean(Won)
     , N_Fights = length(Won)
     , Over_Performance = Win_Prop - Exp_Prop
@@ -578,7 +634,7 @@ df_odds_long %>%
   ) -> df_odds_long_fighters
 ```
 
-Look at which fights were included in the dataset for a specific fighter.  
+Look at which fights were included in the dataset for a specific fighter.   
 
 ```{r}
 df_odds_long %>%
