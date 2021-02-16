@@ -8,7 +8,7 @@ Introduction
 ============
 
 In a another post called [Understanding Fight
-Odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/01/Understanding-Fight-Odds.html),
+Odds](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/16/Understanding-Fight-Odds.html),
 I described what the fight odds (specifically American Odds) signify and
 how to interpret them. I also briefly explored the question “Are fight
 odds accurate?” by looking at the relationship between the actual
@@ -31,8 +31,8 @@ Using data science tools such as web scraping, I have obtained a dataset
 with fight odds information regarding the majority of the UFC fights
 that occurred between 2013 and present.
 
-In particular, the dataset consists of 2929 UFC fights from 260 UFC
-events, spanning from April 27, 2013 to January 20, 2021.
+In particular, the dataset consists of 2941 UFC fights from 261 UFC
+events, spanning from April 27, 2013 to February 06, 2021.
 
 Among other things, the dataset lists the best odds for each fighter
 around the time of their fight, as well as the winner of each fight.
@@ -44,7 +44,8 @@ Let’s Review! Are Fight Odds “Accurate”?
 
 The below graphs, analyzed in greater detail in a another post, showcase
 the relationship between the actual Probability of Victory of fighters
-and the Implied Probability of the fight odds that they were given.
+and the Adjusted Implied Probability of the fight odds that they were
+given.
 
 Compared to my another post, I added a couple graphs that allows us to
 look at the same data from a different perspective. I have added graphs
@@ -52,12 +53,12 @@ that represent Over Performance instead of Probability of Victory on the
 y-axis. Over Performance is simply the difference between the black dots
 (or the blue lines) and the diagonal dotted line from the Probability of
 Victory graphs. If a black dot is above the dotted line, fighters in
-that odds bin overperformed. Conversely, if a balck dot is below the
+that odds bin overperformed. Conversely, if a black dot is below the
 dotted line, fighters in that odds bin underperformed.
 
 <br>
 
-![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-3-1.png)![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-3-2.png)![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-3-3.png)![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-3-4.png)
+![](/AttM/rmd_images/2021-02-16-how_accurate_are_fight_odds/unnamed-chunk-3-1.png)![](/AttM/rmd_images/2021-02-16-how_accurate_are_fight_odds/unnamed-chunk-3-2.png)![](/AttM/rmd_images/2021-02-16-how_accurate_are_fight_odds/unnamed-chunk-3-3.png)![](/AttM/rmd_images/2021-02-16-how_accurate_are_fight_odds/unnamed-chunk-3-4.png)
 
 <br>
 
@@ -87,14 +88,14 @@ data look much nicer / smoother.
 
 <br>
 
-![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-4-1.png)![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-4-2.png)
+![](/AttM/rmd_images/2021-02-16-how_accurate_are_fight_odds/unnamed-chunk-4-1.png)![](/AttM/rmd_images/2021-02-16-how_accurate_are_fight_odds/unnamed-chunk-4-2.png)
 
 <br>
 
 So what do we make of this? Well, had you tried to exploit the
 aforementioned bias by betting on underdogs with Implied Probabilities
 around 37%, you would have probably made some money most years, with the
-exception of 2016.
+exception of 2016 and 2020.
 
 **Does that mean that you should start putting money down on moderate
 underdogs? Not quite. Although the average Over Performance across many
@@ -123,9 +124,6 @@ bias “real” or just a statistical artifact). Perhaps more importantly,
 we could use Inferential Statistics to predict how well the odds will
 perform in future match-ups and determine our confidence in those
 predictions.
-
-STAY TUNED! I will be making use of Inferential Statistics in future
-posts.
 
 <br>
 
@@ -159,7 +157,7 @@ chance”.
 
 <br>
 
-![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-5-1.png)![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-5-2.png)
+![](/AttM/rmd_images/2021-02-16-how_accurate_are_fight_odds/unnamed-chunk-5-1.png)![](/AttM/rmd_images/2021-02-16-how_accurate_are_fight_odds/unnamed-chunk-5-2.png)
 
 <br>
 
@@ -191,7 +189,7 @@ of victory look a bit different:
 
 <br>
 
-![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-6-1.png)![](/AttM/rmd_images/2021-02-01-how_accurate_are_fight_odds/unnamed-chunk-6-2.png)
+![](/AttM/rmd_images/2021-02-16-how_accurate_are_fight_odds/unnamed-chunk-6-1.png)![](/AttM/rmd_images/2021-02-16-how_accurate_are_fight_odds/unnamed-chunk-6-2.png)
 
 <br>
 
@@ -217,7 +215,3 @@ chance” since they tend to overperform when the fight ends in a KO/TKO.
 Finally, bad match-ups (big underdog and big favorite) are less likely
 to end in a decision / more likely to end in a finish (i.e KO/TKO or
 Submission).
-
-In a future post, I intend to focus on how particular fighters have
-performed with respect to the odds. Indeed, who are the most overrated
-and underrated fighters in the UFC?

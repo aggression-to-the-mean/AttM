@@ -524,7 +524,8 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
       ylab("Probability of Victory (%)")+
       xlab("Adjusted Implied Probability (%)")+
       geom_abline(slope=1, intercept=0, linetype = "dotted")+
-      ggtitle("Favorites")->gg
+      ggtitle("Favorites")+
+      theme(text = element_text(size = 16))  ->gg
     print(gg)
 
     # # plot ROI - only real difference is scale along y axis
@@ -629,7 +630,8 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
       ylab("Probability of Victory (%)")+
       xlab("Adjusted Implied Probability (%)")+
       geom_abline(slope=1, intercept=0, linetype = "dotted")+
-      ggtitle("Underdogs")->gg
+      ggtitle("Underdogs")+
+      theme(text = element_text(size = 16))->gg
     print(gg)
 # 
 #     under_perf %>%
