@@ -10,7 +10,7 @@ category: arts
 # Figure path on disk = base.dir + fig.path
 # Figure URL online = base.url + fig.path
 knitr::opts_knit$set(base.dir = "/Users/Shared/AttM/", base.url="/AttM/")
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-02-01-understanding_fight_odds/")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-02-16-understanding_fight_odds/")
 
 # ------
 
@@ -46,13 +46,13 @@ As a UFC fan, you would probably be used to seeing American Odds.  We will focus
 # CHANGE ME
 # change these variables to customize post
 # Betway:
-fighter_fav = "Usman"
-odds_fav = "-250"
+fighter_fav = "Blaydes"
+odds_fav = "-400"
 
-fighter_dog = "Burns"
-odds_dog = "+200"
+fighter_dog = "Lewis"
+odds_dog = "300"
 
-fight_date = "February 13, 2021"
+fight_date = "February 20, 2021"
 
 # other calculations
 num_fav = abs(as.numeric(odds_fav))
@@ -68,7 +68,7 @@ According to [www.bestfightodds.com](https://www.bestfightodds.com/#), BetWay ha
 
 This means that you need to bet \$`r num_fav` on `r fighter_fav` to make a \$100 profit.  Conversely, if you bet \$100 on `r fighter_dog`, you will make a \$`r num_dog` profit.  
 
-![Screen Shot from BestFightOdds](/AttM/rmd_images/2021-02-01-understanding_fight_odds/bestfightodds_burns_vs_usman.png)
+![Screen Shot from BestFightOdds](/AttM/rmd_images/2021-02-16-understanding_fight_odds/best_fight_odds_blaydes_vs_lewis.png)
 
 As you can see, your potential earnings are greater if you bet on `r fighter_dog`.  By definition, this makes `r fighter_dog` the underdog and implies that `r fighter_dog` should be less likely to win than `r fighter_fav`.  
 
@@ -171,15 +171,15 @@ library(rvest)
 #....
 
 # CHANGE ME
-best_fav = "-240"
+best_fav = "-375"
 best_num_fav = abs(as.numeric(best_fav))
-site_fav = "SportsInt."
+site_fav = "DraftKings"
 
-best_dog = "+230"
+best_dog = "+336"
 best_num_dog = as.numeric(best_dog)
-site_dog = "BetOnline"
+site_dog = "SportBet"
 
-worst_dog = "+180"
+worst_dog = "+270"
 worst_num_dog = as.numeric(worst_dog)
 worst_site_dog = "SportsInt."
 
@@ -198,7 +198,7 @@ In our example, as noted above, BetWay has `r fighter_dog` as a `r odds_dog` und
 
 Of course, \$`r extra_dog` may not seem like much.  However, if you compare the best odds (`r best_dog`) for `r fighter_dog` to the worst odds (`r worst_dog` with `r worst_site_dog`), you have a \$`r best_vs_worst` difference (for a \$100 bet).   
 
-![Screen Shot from BestFightOdds](/AttM/rmd_images/2021-02-01-understanding_fight_odds/bestfightodds_burns_vs_usman.png)  
+![Screen Shot from BestFightOdds](/AttM/rmd_images/2021-02-16-understanding_fight_odds/best_fight_odds_blaydes_vs_lewis.png)  
 
 Often times, the difference between the best and worst odds for a given fighter will be larger when dealing with big favorites/underdogs (i.e. larger absolute numbers) than it will be for closer match-ups (i.e. smaller absoluate numbers).    
 
@@ -429,7 +429,7 @@ df_odds_short %>%
 
  <br>
  
-I believe the primary take away of the above graphs is that picking the best available odds and betting exclusively on underdogs or favorites is not a fruitful betting strategy.   
+I believe the primary take away of the above graphs is that picking the best available odds and betting exclusively on underdogs or favorites is not a fruitful betting strategy. With that said, it does appear that picking underdogs produces better results, on average, than picking favorites.   
 
 The calculated ROIs for betting exclusively on underdogs or favorites are reasonably consistent with those listed at [BetMMA.tips](https://www.betmma.tips/mma_betting_favorites_vs_underdogs.php?Org=1).  
  
@@ -444,13 +444,21 @@ df_odds_short %>%
     Year = format(Date,"%Y")
   ) -> df_odds_short
 
-# create function
+# Compute Adjusted Implied Probability to account for the overround and get an unbiased estimate of the probability of victory implied by the odds. 
+df_odds_short %>%
+  dplyr::mutate(
+    Adjusted_Favorite_Probability = Favorite_Probability - Overround/2
+    , Adjusted_Underdog_Probability = Underdog_Probability - Overround/2
+    , Adjusted_Total_Probability = Adjusted_Favorite_Probability + Adjusted_Underdog_Probability
+  ) -> df_odds_short
+
+# function
 gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NULL) {
 
   # get bins for Favorite
-  df_odds_short$Favorite_Probability_Bin = cut(df_odds_short$Favorite_Probability, num_bin)
+  df_odds_short$Favorite_Probability_Bin = cut(df_odds_short$Adjusted_Favorite_Probability, num_bin)
   # get bins for Underdog
-  df_odds_short$Underdog_Probability_Bin = cut(df_odds_short$Underdog_Probability, num_bin)
+  df_odds_short$Underdog_Probability_Bin = cut(df_odds_short$Adjusted_Underdog_Probability, num_bin)
 
   if (is.null(variable)) {
     # check over/under performance for Favorites
@@ -496,68 +504,67 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
 
   if (is.null(variable)) {
 
-    # plot over/under performance
-    fav_perf %>%
-      dplyr::filter(Size_of_Bin >= min_bin_size) %>%
-      ggplot(aes(x=Mid_Bin*100, y=Over_Performance * 100))+
-      geom_point()+
-      geom_smooth(se=F)+
-      geom_hline(yintercept = 0, linetype = "dotted")+
-      ylab("Over Performance (%)")+
-      xlab("Implied Probability (%)")+
-      ggtitle("Favorites")->gg
+    # # plot over/under performance
+    # fav_perf %>%
+    #   dplyr::filter(Size_of_Bin >= min_bin_size) %>%
+    #   ggplot(aes(x=Mid_Bin*100, y=Over_Performance * 100))+
+    #   geom_point()+
+    #   geom_smooth(se=F)+
+    #   geom_hline(yintercept = 0, linetype = "dotted")+
+    #   ylab("Over Performance (%)")+
+    #   xlab("Adjusted Implied Probability (%)")+
+    #   ggtitle("Favorites")->gg
     # print(gg)
 
-    # plot over/under performance
     fav_perf %>%
       dplyr::filter(Size_of_Bin >= min_bin_size) %>%
       ggplot(aes(x=Mid_Bin * 100, y=Prop_of_Victory*100))+
       geom_point()+
       geom_smooth(se=F)+
       ylab("Probability of Victory (%)")+
-      xlab("Implied Probability (%)")+
+      xlab("Adjusted Implied Probability (%)")+
       geom_abline(slope=1, intercept=0, linetype = "dotted")+
       ggtitle("Favorites")->gg
     print(gg)
 
-    # plot ROI - only real difference is scale along y axis
-    fav_perf %>%
-      dplyr::filter(Size_of_Bin >= min_bin_size) %>%
-      ggplot(aes(x=Mid_Bin*100, y= ROI* 100))+
-      geom_point()+
-      geom_smooth(se=F)+
-      geom_hline(yintercept = 0, linetype = "dotted")+
-      ylab("ROI (%)")+
-      xlab("Implied Probability (%)")+
-      ggtitle("Favorites") -> gg
+    # # plot ROI - only real difference is scale along y axis
+    # fav_perf %>%
+    #   dplyr::filter(Size_of_Bin >= min_bin_size) %>%
+    #   ggplot(aes(x=Mid_Bin*100, y= ROI* 100))+
+    #   geom_point()+
+    #   geom_smooth(se=F)+
+    #   geom_hline(yintercept = 0, linetype = "dotted")+
+    #   ylab("ROI (%)")+
+    #   xlab("Adjusted Implied Probability (%)")+
+    #   ggtitle("Favorites") -> gg
     # print(gg)
 
   } else {
-    # plot over/under performance
-    fav_perf %>%
-      dplyr::filter(Size_of_Bin >= min_bin_size) %>%
-      ggplot(aes(x=Mid_Bin*100, y=Over_Performance * 100, group=Dummy, colour = Dummy))+
-      geom_point()+
-      geom_smooth(se=F)+
-      geom_hline(yintercept = 0, linetype = "dotted")+
-      ylab("Over Performance (%)")+
-      xlab("Implied Probability (%)")+
-      ggtitle("Favorites")+
-      labs(color=sprintf("%s", variable)) -> gg
-    print(gg)
-
-    # plot ROI - only real difference is scale along y axis
-    fav_perf %>%
-      dplyr::filter(Size_of_Bin >= min_bin_size) %>%
-      ggplot(aes(x=Mid_Bin*100, y= ROI* 100, group=Dummy, colour = Dummy))+
-      geom_point()+
-      geom_smooth(se=F)+
-      geom_hline(yintercept = 0, linetype = "dotted")+
-      ylab("ROI (%)")+
-      xlab("Implied Probability (%)")+
-      ggtitle("Favorites")+
-      labs(color=sprintf("%s", variable)) -> gg
-    print(gg)
+    # # plot over/under performance
+    # fav_perf %>%
+    #   dplyr::filter(Size_of_Bin >= min_bin_size) %>%
+    #   ggplot(aes(x=Mid_Bin*100, y=Over_Performance * 100, group=Dummy, colour = Dummy))+
+    #   geom_point()+
+    #   geom_smooth(se=F)+
+    #   geom_hline(yintercept = 0, linetype = "dotted")+
+    #   ylab("Over Performance (%)")+
+    #   xlab("Adjusted Implied Probability (%)")+
+    #   ggtitle("Favorites")+
+    #   labs(color=sprintf("%s", variable)) -> gg
+    # print(gg)
+    # 
+    # # plot ROI - only real difference is scale along y axis
+    # fav_perf %>%
+    #   dplyr::filter(Size_of_Bin >= min_bin_size) %>%
+    #   ggplot(aes(x=Mid_Bin*100, y= ROI* 100, group=Dummy, colour = Dummy))+
+    #   geom_point()+
+    #   geom_smooth(se=F)+
+    #   geom_hline(yintercept = 0, linetype = "dotted")+
+    #   ylab("ROI (%)")+
+    #   xlab("Adjusted Implied Probability (%)")+
+    #   ggtitle("Favorites")+
+    #   labs(color=sprintf("%s", variable)) -> gg
+    # print(gg)
   }
 
 
@@ -601,67 +608,66 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
 
 
   if (is.null(variable)) {
-    # plot over/under performance
-    under_perf %>%
-      dplyr::filter(Size_of_Bin >= min_bin_size) %>%
-      ggplot(aes(x=Mid_Bin*100, y=Over_Performance * 100))+
-      geom_point()+
-      geom_smooth(se=F)+
-      geom_hline(yintercept = 0, linetype = "dotted")+
-      ylab("Over Performance (%)")+
-      xlab("Implied Probability (%)")+
-      ggtitle("Underdogs")->gg
+    
+    # under_perf %>%
+    #   dplyr::filter(Size_of_Bin >= min_bin_size) %>%
+    #   ggplot(aes(x=Mid_Bin*100, y=Over_Performance * 100))+
+    #   geom_point()+
+    #   geom_smooth(se=F)+
+    #   geom_hline(yintercept = 0, linetype = "dotted")+
+    #   ylab("Over Performance (%)")+
+    #   xlab("Adjusted Implied Probability (%)")+
+    #   ggtitle("Underdogs")->gg
     # print(gg)
 
-    # plot over/under performance
+    
     under_perf %>%
       dplyr::filter(Size_of_Bin >= min_bin_size) %>%
       ggplot(aes(x=Mid_Bin * 100, y=Prop_of_Victory*100))+
       geom_point()+
       geom_smooth(se=F)+
       ylab("Probability of Victory (%)")+
-      xlab("Implied Probability (%)")+
+      xlab("Adjusted Implied Probability (%)")+
       geom_abline(slope=1, intercept=0, linetype = "dotted")+
       ggtitle("Underdogs")->gg
     print(gg)
-
-    under_perf %>%
-      dplyr::filter(Size_of_Bin >= min_bin_size) %>%
-      ggplot(aes(x=Mid_Bin*100, y=ROI * 100))+
-      geom_point()+
-      geom_smooth(se=F)+
-      geom_hline(yintercept = 0, linetype = "dotted")+
-      ylab("ROI (%)")+
-      xlab("Implied Probability (%)")+
-      ggtitle("Underdogs")-> gg
-    # print(gg)
+# 
+#     under_perf %>%
+#       dplyr::filter(Size_of_Bin >= min_bin_size) %>%
+#       ggplot(aes(x=Mid_Bin*100, y=ROI * 100))+
+#       geom_point()+
+#       geom_smooth(se=F)+
+#       geom_hline(yintercept = 0, linetype = "dotted")+
+#       ylab("ROI (%)")+
+#       xlab("Adjusted Implied Probability (%)")+
+#       ggtitle("Underdogs")-> gg
+#     print(gg)
 
   } else {
 
-    # plot over/under performance
-    under_perf %>%
-      dplyr::filter(Size_of_Bin >= min_bin_size) %>%
-      ggplot(aes(x=Mid_Bin*100, y=Over_Performance * 100, group=Dummy, colour = Dummy))+
-      geom_point()+
-      geom_smooth(se=F)+
-      geom_hline(yintercept = 0, linetype = "dotted")+
-      ylab("Over Performance (%)")+
-      xlab("Implied Probability (%)")+
-      ggtitle("Underdogs")+
-      labs(color=sprintf("%s", variable)) -> gg
-    print(gg)
-
-    under_perf %>%
-      dplyr::filter(Size_of_Bin >= min_bin_size) %>%
-      ggplot(aes(x=Mid_Bin*100, y=ROI * 100, group=Dummy, colour = Dummy))+
-      geom_point()+
-      geom_smooth(se=F)+
-      geom_hline(yintercept = 0, linetype = "dotted")+
-      ylab("ROI (%)")+
-      xlab("Implied Probability (%)")+
-      ggtitle("Underdogs")+
-      labs(color=sprintf("%s", variable)) -> gg
-    print(gg)
+    # under_perf %>%
+    #   dplyr::filter(Size_of_Bin >= min_bin_size) %>%
+    #   ggplot(aes(x=Mid_Bin*100, y=Over_Performance * 100, group=Dummy, colour = Dummy))+
+    #   geom_point()+
+    #   geom_smooth(se=F)+
+    #   geom_hline(yintercept = 0, linetype = "dotted")+
+    #   ylab("Over Performance (%)")+
+    #   xlab("Adjusted Implied Probability (%)")+
+    #   ggtitle("Underdogs")+
+    #   labs(color=sprintf("%s", variable)) -> gg
+    # print(gg)
+    # 
+    # under_perf %>%
+    #   dplyr::filter(Size_of_Bin >= min_bin_size) %>%
+    #   ggplot(aes(x=Mid_Bin*100, y=ROI * 100, group=Dummy, colour = Dummy))+
+    #   geom_point()+
+    #   geom_smooth(se=F)+
+    #   geom_hline(yintercept = 0, linetype = "dotted")+
+    #   ylab("ROI (%)")+
+    #   xlab("Adjusted Implied Probability (%)")+
+    #   ggtitle("Underdogs")+
+    #   labs(color=sprintf("%s", variable)) -> gg
+    # print(gg)
   }
   
   # process to return()
@@ -682,7 +688,10 @@ gauge_over_performance = function(num_bin = 10, min_bin_size = 30, variable = NU
 
 But what does it mean for the odds to be "accurate"?  
 
-Well, as noted earlier in this post, we can derive Implied Probabilities from fight odds. These probabilities are meant to represent the probability that a given fighter will win. Of course, a given fight only occurs once. For instance, there will be only one winner of the `r fighter_dog` vs. `r fighter_fav` contest. We cannot get them to fight 100 times to see how often each of them wins. What we can do, however, is look at how the odds perform across fights. For example, if we look at all the fights for which the Implied Probability of the favorite was between 60-65%, we would expect that the favorite won 60-65% of the time. We can do this for the whole spectrum of Implied Probabilities to gauge the overall accuracy of the Fight Odds.  
+Well, as noted earlier in this post, we can derive Implied Probabilities from fight odds. These probabilities are meant to represent the probability that a given fighter will win. Of course, a given fight only occurs once. For instance, there will be only one winner of the `r fighter_dog` vs. `r fighter_fav` contest. We cannot get them to fight 100 times to see how often each of them wins. What we can do, however, is look at how the odds perform across fights. For example, if we look at all the fights for which the Implied Probability of the favorite was between 60-65%, we would expect that the favorite won 60-65% of the time. We can do this for the whole spectrum of Implied Probabilities to gauge the overall accuracy of the Fight Odds.   
+
+ | NOTE: In order to get an unbiased sense of the Implied Probabilities of the best fight odds, we adjust for the overround so that the total probability of any given fight is 100%. As such, the findings in the below will make use of Adjusted Implied Probabilities. For simplicity, we will continue to refer to them as Implied Probabilities. |
+|-----------------------------------------|  
 
 The below graphs showcase this aforementioned spectrum. For both underdogs and favorites, I computed the actual probability of victory of fighters in various ranges of Implied Probabilities.  In common statistical language, we refer to these ranges as "bins". As such, the x coordinate of each black dot is simply the middle point of the bin it represents. The y coordinate is the probability of victory of all the fighters that fell within that bin. The smooth blue curve represents a basic statistical model that tries to fit a curve to the black dots. For our purposes, it gives us a better sense of the trend underlying the black dots.   
 
@@ -708,11 +717,5 @@ According to [BetMMA.tips](https://www.betmma.tips/mma_betting_favorites_vs_unde
 
 # Conclusion
 
-In a sentence: fight odds are reasonably representative of a fighter's chance of victory and it is difficult to make money betting on UFC fights.  
+In a sentence: fight odds are reasonably representative of a fighter's chance of victory and it is difficult to make money betting on UFC fights.   
 
-Admittedly, there is much more nuance to understanding fight odds.  Indeed, my goal is to go into the weeds in future posts by exploring some of the following points:   
-  - How does the performance/accuracy of fight odds vary from year to year?   
-  - What is the relationship between fight odds and the method of victory (e.g. TKO vs. U-DEC)?  
-  - How can fight odds be used to predict the outcome of a particular fight?   
-  
- <br>
