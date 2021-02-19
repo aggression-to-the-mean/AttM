@@ -10,7 +10,7 @@ category: arts
 # Figure path on disk = base.dir + fig.path
 # Figure URL online = base.url + fig.path
 knitr::opts_knit$set(base.dir = "/Users/Shared/AttM/", base.url="/AttM/")
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-02-06-over_rated_fighters/")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-02-19-over_rated_fighters/")
 
 # ------
 
@@ -23,7 +23,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2
 
 ## Introduction
 
-In previous posts, we identified some of the UFC's most [Under Rated](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/28/Under-Rated-Fighters.html) and [Over Rated](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/29/Over-Rated-Fighters.html) fighters by examining the extent to which they had underperformed or overperformed relative to the odds.  
+In other posts, we identified some of the UFC's most [Under Rated](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/19/Under-Rated-Fighters.html) and [Over Rated](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/19/Over-Rated-Fighters.html) fighters by examining the extent to which they had underperformed or overperformed relative to the odds.  
 
 The purpose of this post is to identify the most and least valued fighters, regardless of performance. In other words, which fighters have had reliably favorable or unfavorable fight odds?  
 
@@ -110,6 +110,13 @@ df_odds_short %>%
     , Overround = Total_Probability - 1
   ) -> df_odds_short
 
+df_odds_short %>%
+  dplyr::mutate(
+    Adjusted_Favorite_Probability = Favorite_Probability - Overround/2
+    , Adjusted_Underdog_Probability = Underdog_Probability - Overround/2
+    , Adjusted_Total_Probability = Adjusted_Favorite_Probability + Adjusted_Underdog_Probability
+  ) -> df_odds_short
+
 ```
 
 Using data science tools such as web scraping, I have obtained a dataset with fight odds information regarding the majority of the UFC fights that occurred between 2013 and present.     
@@ -138,49 +145,64 @@ The below table lists the top 10 Most Valued fighters, in the dataset, with at l
 
 There are no real surprises below. Many of the fighters on the list are widely considered to be among the most dominant fighters (and champions) of their time.  
 
-Demetrious Johnson stands out as having an astonishing Average Implied Probability of 87%, based on 9 of his many UFC fights.  
+Demetrious Johnson stands out as having an astonishing Average Implied Probability of 86%, based on 9 of his many UFC fights.  
 
  <br>
 
 ```{r include = T, echo = F}
-df_odds %>% dplyr::select(
-  c(
-    NAME
-    , Event
-    , Date
-    , Result
-    , Winner_Odds
-    , Loser_Odds
+df_odds_short %>%
+  gather(key = "Result", value = "NAME", Loser:Winner) -> df_odds_long
+
+df_odds_long %>%
+  dplyr::mutate(
+  Was_Favorite = ifelse(
+    (Favorite_was_Winner & (Result == "Winner")) | (!Favorite_was_Winner & (Result == "Loser"))
+    , T
+    , F
   )
 ) -> df_odds_long
 
 df_odds_long %>%
   dplyr::mutate(
-    Fighter_Odds = ifelse(Result == "Winner", Winner_Odds, Loser_Odds)
+    Implied_Probability = ifelse(
+      Was_Favorite
+      , Favorite_Probability
+      , Underdog_Probability
+    )
+    , Adjusted_Implied_Probability = ifelse(
+      Was_Favorite
+      , Adjusted_Favorite_Probability
+      , Adjusted_Underdog_Probability
+    )
   ) -> df_odds_long
+
+df_odds_long %>% dplyr::select(
+  c(
+    NAME
+    , Event
+    , Date
+    , Result
+    , Implied_Probability
+    , Adjusted_Implied_Probability
+  )
+) -> df_odds_long
 
 df_odds_long %>%
   dplyr::mutate(
-    Implied_Probability = 1/Fighter_Odds
-    , Won = ifelse(Result == "Winner", T, F)
+    Won = ifelse(Result == "Winner", T, F)
     , Logit_Prob = qlogis(Implied_Probability)
+    , Adjusted_Logit_Prob = qlogis(Adjusted_Implied_Probability)
   ) -> df_odds_long
 
 df_odds_long %>%
   dplyr::group_by(NAME) %>%
   dplyr::summarise(
     N_Fights = length(Won)
-    , Exp_Prop = round(mean(Implied_Probability),2)*100
-    , Logit_Exp_Prop = mean(Logit_Prob)
-    , Win_Prop = round(mean(Won),2)*100
-    , Under_Performance = -1*round(Win_Prop - Exp_Prop,0)
-    , Logit_Over = qlogis(Win_Prop) - Logit_Exp_Prop
-    , Back_Trans_Exp = plogis(Logit_Exp_Prop)
+    , Exp_Prop = round(mean(Adjusted_Implied_Probability) * 100)
   ) -> df_odds_long_fighters
 
 df_odds_long_fighters %>%
   dplyr::filter(N_Fights >= 5) %>%
-  dplyr::select(NAME:Exp_Prop) %>%
   dplyr::arrange(desc(Exp_Prop)) %>%
   head(10) -> df_most_valued
 
@@ -189,8 +211,8 @@ kable(df_most_valued
       , col.names = c(
         "Fighter Name"
         , "Number of Fights"
-        , "Average Implied Probability (%)"
-        )
+        , "Average Adjusted Implied Probability (%)"
+       )
       )  
 
 ```
@@ -223,7 +245,7 @@ kable(df_least_valued
       , col.names = c(
         "Fighter Name"
         , "Number of Fights"
-        , "Average Implied Probability (%)"
+        , "Average Adjusted Implied Probability (%)"
         )
       )  
 

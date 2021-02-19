@@ -1,16 +1,17 @@
---- 
+---
 category: arts
 ---
+
 
 <br>
 
 Introduction
 ------------
 
-In previous posts, we identified some of the UFC’s most [Under
-Rated](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/28/Under-Rated-Fighters.html)
+In other posts, we identified some of the UFC’s most [Under
+Rated](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/19/Under-Rated-Fighters.html)
 and [Over
-Rated](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/29/Over-Rated-Fighters.html)
+Rated](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/19/Over-Rated-Fighters.html)
 fighters by examining the extent to which they had underperformed or
 overperformed relative to the odds.
 
@@ -41,8 +42,8 @@ Using data science tools such as web scraping, I have obtained a dataset
 with fight odds information regarding the majority of the UFC fights
 that occurred between 2013 and present.
 
-In particular, the dataset consists of 2929 UFC fights from 260 UFC
-events, spanning from April 27, 2013 to January 20, 2021.
+In particular, the dataset consists of 2941 UFC fights from 261 UFC
+events, spanning from April 27, 2013 to February 06, 2021.
 
 Among other things, the dataset lists the best odds for each fighter
 around the time of their fight, as well as the winner of each fight.
@@ -76,7 +77,7 @@ widely considered to be among the most dominant fighters (and champions)
 of their time.
 
 Demetrious Johnson stands out as having an astonishing Average Implied
-Probability of 87%, based on 9 of his many UFC fights.
+Probability of 86%, based on 9 of his many UFC fights.
 
 <br>
 
@@ -86,29 +87,29 @@ Probability of 87%, based on 9 of his many UFC fights.
 <tr class="header">
 <th style="text-align: left;">Fighter Name</th>
 <th style="text-align: right;">Number of Fights</th>
-<th style="text-align: right;">Average Implied Probability (%)</th>
+<th style="text-align: right;">Average Adjusted Implied Probability (%)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Demetrious Johnson</td>
 <td style="text-align: right;">9</td>
-<td style="text-align: right;">87</td>
+<td style="text-align: right;">86</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">Cristiane Justino</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">83</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">Ronda Rousey</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">83</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">Cristiane Justino</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">82</td>
-</tr>
 <tr class="even">
 <td style="text-align: left;">Petr Yan</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">82</td>
+<td style="text-align: right;">81</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Zabit Magomedsharipov</td>
@@ -126,19 +127,19 @@ Probability of 87%, based on 9 of his many UFC fights.
 <td style="text-align: right;">79</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Magomed Ankalaev</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">77</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">Khabib Nurmagomedov</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">76</td>
 </tr>
+<tr class="odd">
+<td style="text-align: left;">Magomed Ankalaev</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">76</td>
+</tr>
 <tr class="even">
-<td style="text-align: left;">Mairbek Taisumov</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">74</td>
+<td style="text-align: left;">Joe Duffy</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">73</td>
 </tr>
 </tbody>
 </table>
@@ -181,18 +182,18 @@ favorable earlier in his career, when he was in his prime.
 <tr class="header">
 <th style="text-align: left;">Fighter Name</th>
 <th style="text-align: right;">Number of Fights</th>
-<th style="text-align: right;">Average Implied Probability (%)</th>
+<th style="text-align: right;">Average Adjusted Implied Probability (%)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Daniel Kelly</td>
-<td style="text-align: right;">10</td>
+<td style="text-align: left;">Roxanne Modafferi</td>
+<td style="text-align: right;">8</td>
 <td style="text-align: right;">27</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Roxanne Modafferi</td>
-<td style="text-align: right;">8</td>
+<td style="text-align: left;">Daniel Kelly</td>
+<td style="text-align: right;">10</td>
 <td style="text-align: right;">28</td>
 </tr>
 <tr class="odd">
@@ -221,18 +222,18 @@ favorable earlier in his career, when he was in his prime.
 <td style="text-align: right;">30</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">Diego Sanchez</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">31</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">Garreth McLellan</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">31</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">Takanori Gomi</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">31</td>
-</tr>
 <tr class="even">
-<td style="text-align: left;">Yaotzin Meza</td>
-<td style="text-align: right;">5</td>
+<td style="text-align: left;">Rogerio Nogueira</td>
+<td style="text-align: right;">6</td>
 <td style="text-align: right;">31</td>
 </tr>
 </tbody>
