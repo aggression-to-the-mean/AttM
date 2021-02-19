@@ -7,8 +7,8 @@ category: arts
 Introduction
 ------------
 
-In [a previous
-post](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/28/Under-Rated-Fighters.html),
+In [another
+post](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/19/Under-Rated-Fighters.html),
 we identified some of the UFC’s most Under Rated fighters by examining
 the extent to which they had overperformed relative to the odds.
 
@@ -20,7 +20,7 @@ fighters in the UFC.
 Defining “Over Rated”
 =====================
 
-In a previous post, to assess the extent to which a fighter was Under
+In another post, to assess the extent to which a fighter was Under
 Rated, we examined if the fighter won at a greater rate than the average
 Implied Probability of their odds (i.e. has the fighter been
 overperforming)?
@@ -40,8 +40,8 @@ Using data science tools such as web scraping, I have obtained a dataset
 with fight odds information regarding the majority of the UFC fights
 that occurred between 2013 and present.
 
-In particular, the dataset consists of 2929 UFC fights from 260 UFC
-events, spanning from April 27, 2013 to January 20, 2021.
+In particular, the dataset consists of 2941 UFC fights from 261 UFC
+events, spanning from April 27, 2013 to February 06, 2021.
 
 Among other things, the dataset lists the best odds for each fighter
 around the time of their fight, as well as the winner of each fight.
@@ -73,20 +73,20 @@ odds subtracted by Actual Rate of Victory.
 
 <br>
 
-<table style="width:100%;">
-<caption>Top 10 Under Rated Fighters with at least 5 Fights</caption>
+<table>
+<caption>Top 10 Over Rated Fighters with at least 5 Fights</caption>
 <colgroup>
+<col style="width: 16%" />
+<col style="width: 13%" />
+<col style="width: 32%" />
+<col style="width: 21%" />
 <col style="width: 17%" />
-<col style="width: 14%" />
-<col style="width: 26%" />
-<col style="width: 22%" />
-<col style="width: 18%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Fighter Name</th>
 <th style="text-align: right;">Number of Fights</th>
-<th style="text-align: right;">Average Implied Probability (%)</th>
+<th style="text-align: right;">Average Adjusted Implied Probability (%)</th>
 <th style="text-align: right;">Actual Rate of Victory (%)</th>
 <th style="text-align: right;">Under Performance (%)</th>
 </tr>
@@ -95,23 +95,23 @@ odds subtracted by Actual Rate of Victory.
 <tr class="odd">
 <td style="text-align: left;">Kailin Curran</td>
 <td style="text-align: right;">7</td>
-<td style="text-align: right;">55</td>
+<td style="text-align: right;">54</td>
 <td style="text-align: right;">14</td>
-<td style="text-align: right;">41</td>
+<td style="text-align: right;">40</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Hyun Gyu Lim</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">58</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">38</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">Joshua Burkman</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">38</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">38</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hyun Gyu Lim</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">37</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Alexander Gustafsson</td>
@@ -130,22 +130,22 @@ odds subtracted by Actual Rate of Victory.
 <tr class="even">
 <td style="text-align: left;">Junior Albini</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">54</td>
+<td style="text-align: right;">53</td>
 <td style="text-align: right;">20</td>
-<td style="text-align: right;">34</td>
+<td style="text-align: right;">33</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">Rashad Evans</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">Andrea Lee</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">71</td>
 <td style="text-align: right;">40</td>
-<td style="text-align: right;">31</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Rashad Evans</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">51</td>
-<td style="text-align: right;">20</td>
 <td style="text-align: right;">31</td>
 </tr>
 <tr class="odd">
@@ -158,9 +158,9 @@ odds subtracted by Actual Rate of Victory.
 <tr class="even">
 <td style="text-align: left;">Anderson Silva</td>
 <td style="text-align: right;">7</td>
-<td style="text-align: right;">43</td>
+<td style="text-align: right;">42</td>
 <td style="text-align: right;">14</td>
-<td style="text-align: right;">29</td>
+<td style="text-align: right;">28</td>
 </tr>
 </tbody>
 </table>
@@ -169,7 +169,7 @@ odds subtracted by Actual Rate of Victory.
 
 I find these findings (the table above) a fair bit less interesting than
 those for the most [Under Rated
-fighters](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/28/Under-Rated-Fighters.html).
+fighters](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/19/Under-Rated-Fighters.html).
 
 For starters, the names are not as big, overall, and the fighters do not
 have as many fights under their belts, on average. I believe that part
@@ -203,11 +203,11 @@ included in the dataset.
 <table>
 <caption>Alexander Gustafsson Fights Included in the Dataset</caption>
 <colgroup>
-<col style="width: 20%" />
-<col style="width: 39%" />
-<col style="width: 10%" />
+<col style="width: 18%" />
+<col style="width: 36%" />
+<col style="width: 9%" />
 <col style="width: 6%" />
-<col style="width: 23%" />
+<col style="width: 29%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -215,7 +215,7 @@ included in the dataset.
 <th style="text-align: left;">Event</th>
 <th style="text-align: left;">Date</th>
 <th style="text-align: left;">Result</th>
-<th style="text-align: right;">Implied Probability (%)</th>
+<th style="text-align: right;">Adjusted Implied Probability (%)</th>
 </tr>
 </thead>
 <tbody>
@@ -231,7 +231,7 @@ included in the dataset.
 <td style="text-align: left;">UFC 192: Cormier vs Gustafsson</td>
 <td style="text-align: left;">2015-10-03</td>
 <td style="text-align: left;">Loser</td>
-<td style="text-align: right;">29</td>
+<td style="text-align: right;">30</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Alexander Gustafsson</td>
@@ -259,14 +259,14 @@ included in the dataset.
 <td style="text-align: left;">UFC Fight Night: Gustafsson vs. Smith</td>
 <td style="text-align: left;">2019-06-01</td>
 <td style="text-align: left;">Loser</td>
-<td style="text-align: right;">75</td>
+<td style="text-align: right;">74</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Alexander Gustafsson</td>
 <td style="text-align: left;">UFC Fight Night: Whittaker vs. Till</td>
 <td style="text-align: left;">2020-07-25</td>
 <td style="text-align: left;">Loser</td>
-<td style="text-align: right;">77</td>
+<td style="text-align: right;">76</td>
 </tr>
 </tbody>
 </table>
@@ -279,14 +279,15 @@ Jon Jones contest onward, since I believe it tells an interesting story.
 Below are the two fights in that period of time which are not in the
 dataset:
 
-<table>
+<table style="width:100%;">
 <colgroup>
-<col style="width: 18%" />
 <col style="width: 15%" />
-<col style="width: 15%" />
-<col style="width: 16%" />
-<col style="width: 19%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
 <col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 16%" />
+<col style="width: 12%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -294,7 +295,8 @@ dataset:
 <th style="text-align: center;">Opponent</th>
 <th style="text-align: center;">Result</th>
 <th style="text-align: center;">Decimal Odds</th>
-<th style="text-align: center;">Implied Probability (%)</th>
+<th style="text-align: center;">Opponent Decimal Odds</th>
+<th style="text-align: center;">Adjusted Implied Probability (%)</th>
 <th style="text-align: right;">Under Performance (%)</th>
 </tr>
 </thead>
@@ -304,6 +306,7 @@ dataset:
 <td style="text-align: center;">Jones</td>
 <td style="text-align: center;">Loser</td>
 <td style="text-align: center;">7.60</td>
+<td style="text-align: center;">1.14</td>
 <td style="text-align: center;">13</td>
 <td style="text-align: right;">13</td>
 </tr>
@@ -312,6 +315,7 @@ dataset:
 <td style="text-align: center;">Manuwa</td>
 <td style="text-align: center;">Winner</td>
 <td style="text-align: center;">1.20</td>
+<td style="text-align: center;">5.75</td>
 <td style="text-align: center;">83</td>
 <td style="text-align: right;"><strong>-</strong>17</td>
 </tr>
@@ -355,7 +359,7 @@ Conclusion
 In this post, I discussed what made a fighter Over Rated. The results
 emanating from the dataset were somewhat misleading and not as
 interesting as those for the [Under Rated
-fighters](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/28/Under-Rated-Fighters.html).
+fighters](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/19/Under-Rated-Fighters.html).
 
 As a result, I decided to focus on the interesting odds profile of
 Gustafsson. Certainly, Gustafsson appears to have been Over Rated since
@@ -363,7 +367,3 @@ his first Jones contest. However, it is unclear if that close decision
 against Jones biased the odds in Gustafsson’s favor, or if the bettors
 had always had such belief in his talents (preceeding the first Jones
 fight).
-
-In future posts, I may explore additional fighter-specific odds
-information such as:  
-- Least and Most Valued fighters (regardless of performance)

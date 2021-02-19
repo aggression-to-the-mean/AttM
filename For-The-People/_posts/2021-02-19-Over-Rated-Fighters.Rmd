@@ -10,7 +10,7 @@ category: arts
 # Figure path on disk = base.dir + fig.path
 # Figure URL online = base.url + fig.path
 knitr::opts_knit$set(base.dir = "/Users/Shared/AttM/", base.url="/AttM/")
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-01-29-over_rated_fighters/")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2021-02-19-over_rated_fighters/")
 
 # ------
 
@@ -23,7 +23,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "rmd_images/2
 
 ## Introduction
 
-In [a previous post](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/28/Under-Rated-Fighters.html), we identified some of the UFC's most Under Rated fighters by examining the extent to which they had overperformed relative to the odds.  
+In [another post](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/19/Under-Rated-Fighters.html), we identified some of the UFC's most Under Rated fighters by examining the extent to which they had overperformed relative to the odds.  
 
 The purpose of this post is to identify some of the most Over Rated fighters in the UFC.   
 
@@ -31,7 +31,7 @@ The purpose of this post is to identify some of the most Over Rated fighters in 
 
 # Defining "Over Rated"
 
-In a previous post, to assess the extent to which a fighter was Under Rated, we examined if the fighter won at a greater rate than the average Implied Probability of their odds (i.e. has the fighter been overperforming)?
+In another post, to assess the extent to which a fighter was Under Rated, we examined if the fighter won at a greater rate than the average Implied Probability of their odds (i.e. has the fighter been overperforming)?
 
 In this post, we will examine the converse: has a fighter **lost** at a greater rate than the average  Implied Probability of their odds (i.e. has the fighter been underperforming). Indeed, if a fighter has been underperforming, then they have been effectively Over Rated by the odds. 
 
@@ -110,6 +110,13 @@ df_odds_short %>%
     , Overround = Total_Probability - 1
   ) -> df_odds_short
 
+df_odds_short %>%
+  dplyr::mutate(
+    Adjusted_Favorite_Probability = Favorite_Probability - Overround/2
+    , Adjusted_Underdog_Probability = Underdog_Probability - Overround/2
+    , Adjusted_Total_Probability = Adjusted_Favorite_Probability + Adjusted_Underdog_Probability
+  ) -> df_odds_short
+
 ```
 
 Using data science tools such as web scraping, I have obtained a dataset with fight odds information regarding the majority of the UFC fights that occurred between 2013 and present.     
@@ -139,63 +146,79 @@ The below table lists the top 10 Over Rated fighters, in the dataset, with at le
  <br>
 
 ```{r include = T, echo = F}
-df_odds %>% dplyr::select(
-  c(
-    NAME
-    , Event
-    , Date
-    , Result
-    , Winner_Odds
-    , Loser_Odds
+df_odds_short %>%
+  gather(key = "Result", value = "NAME", Loser:Winner) -> df_odds_long
+
+df_odds_long %>%
+  dplyr::mutate(
+  Was_Favorite = ifelse(
+    (Favorite_was_Winner & (Result == "Winner")) | (!Favorite_was_Winner & (Result == "Loser"))
+    , T
+    , F
   )
 ) -> df_odds_long
 
 df_odds_long %>%
   dplyr::mutate(
-    Fighter_Odds = ifelse(Result == "Winner", Winner_Odds, Loser_Odds)
+    Implied_Probability = ifelse(
+      Was_Favorite
+      , Favorite_Probability
+      , Underdog_Probability
+    )
+    , Adjusted_Implied_Probability = ifelse(
+      Was_Favorite
+      , Adjusted_Favorite_Probability
+      , Adjusted_Underdog_Probability
+    )
   ) -> df_odds_long
+
+df_odds_long %>% dplyr::select(
+  c(
+    NAME
+    , Event
+    , Date
+    , Result
+    , Implied_Probability
+    , Adjusted_Implied_Probability
+  )
+) -> df_odds_long
 
 df_odds_long %>%
   dplyr::mutate(
-    Implied_Probability = 1/Fighter_Odds
-    , Won = ifelse(Result == "Winner", T, F)
+    Won = ifelse(Result == "Winner", T, F)
     , Logit_Prob = qlogis(Implied_Probability)
+    , Adjusted_Logit_Prob = qlogis(Adjusted_Implied_Probability)
   ) -> df_odds_long
 
 df_odds_long %>%
   dplyr::group_by(NAME) %>%
   dplyr::summarise(
     N_Fights = length(Won)
-    , Exp_Prop = round(mean(Implied_Probability),2)*100
-    , Logit_Exp_Prop = mean(Logit_Prob)
-    , Win_Prop = round(mean(Won),2)*100
-    , Under_Performance = -1*round(Win_Prop - Exp_Prop,0)
-    , Logit_Over = qlogis(Win_Prop) - Logit_Exp_Prop
-    , Back_Trans_Exp = plogis(Logit_Exp_Prop)
+    , Exp_Prop = round(mean(Adjusted_Implied_Probability) * 100)
+    , Win_Prop = round(mean(Won) * 100)
+    , Under_Performance = -1*round(Win_Prop - Exp_Prop)
   ) -> df_odds_long_fighters
 
 df_odds_long_fighters %>%
   dplyr::filter(N_Fights >= 5) %>%
-  dplyr::select(NAME:Under_Performance, -Logit_Exp_Prop) %>%
   dplyr::arrange(desc(Under_Performance)) %>%
   head(10) -> df_top_under_perform
 
 kable(df_top_under_perform
-      , caption = "Top 10 Under Rated Fighters with at least 5 Fights"
+      , caption = "Top 10 Over Rated Fighters with at least 5 Fights"
       , col.names = c(
         "Fighter Name"
         , "Number of Fights"
-        , "Average Implied Probability (%)"
+        , "Average Adjusted Implied Probability (%)"
         , "Actual Rate of Victory (%)"
         , "Under Performance (%)"
-        )
+       )
       )  
-
 ```
 
  <br>
  
-I find these findings (the table above) a fair bit less interesting than those for the most [Under Rated fighters](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/28/Under-Rated-Fighters.html).  
+I find these findings (the table above) a fair bit less interesting than those for the most [Under Rated fighters](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/19/Under-Rated-Fighters.html).  
 
 For starters, the names are not as big, overall, and the fighters do not have as many fights under their belts, on average. I believe that part of the reason for this is that, by definition, Over Rated fighters have not performed as well as they should have, which means they likely have not gotten as many UFC fights or been recognized as much as their peers.  
 
@@ -214,8 +237,8 @@ The below table displays the Alexander Gustafsson fights that are included in th
 ```{r include = T, echo = F}
 df_odds_long %>%
   dplyr::filter(NAME == "Alexander Gustafsson") %>%
-  dplyr::select(NAME:Result, Implied_Probability) %>%
-  dplyr::mutate(Implied_Probability = round(Implied_Probability * 100)) %>%
+  dplyr::select(NAME:Result, Adjusted_Implied_Probability) %>%
+  dplyr::mutate(Adjusted_Implied_Probability = round(Adjusted_Implied_Probability * 100)) %>%
   dplyr::arrange(Date) -> df_gus
 
 kable(df_gus
@@ -225,7 +248,7 @@ kable(df_gus
         , "Event"
         , "Date"
         , "Result"
-        , "Implied Probability (%)"
+        , "Adjusted Implied Probability (%)"
        )
       )
 ```
@@ -234,10 +257,10 @@ kable(df_gus
 
 I decided to focus on [Gustafsson's fights](https://www.ufc.com/athlete/alexander-gustafsson) from the first Jon Jones contest onward, since I believe it tells an interesting story.  Below are the two fights in that period of time which are not in the dataset:  
 
-| Date  | Opponent | Result     | Decimal Odds     | Implied Probability (%)  | Under Performance (%) |
-| :------------- | :----------: | :----------: | :-----------: | :-------------: | ----------: | 
-|  2013-09-21   | Jones | Loser   |      7.60        |          13        |            13        | 
-|  2014-03-08   | Manuwa | Winner     |      1.20        |          83        |           **-**17      | 
+| Date  | Opponent | Result | Decimal Odds |  Opponent Decimal Odds | Adjusted Implied Probability (%)  | Under Performance (%) |
+| :------------- | :----------: | :----------: | :-----------: | :-----------: | :-------------: | ----------: | 
+|  2013-09-21   | Jones | Loser   |   7.60    |   1.14       |        13        |            13        | 
+|  2014-03-08   | Manuwa | Winner  |   1.20  |   5.75        |         83        |           **-**17      | 
 
  <br>
  
@@ -256,9 +279,6 @@ Anyway, Gustafsson's odds profile is quite strange. Overall, he seems to have be
 
 ## Conclusion
 
-In this post, I discussed what made a fighter Over Rated. The results emanating from the dataset were somewhat misleading and not as interesting as those for the [Under Rated fighters](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/01/28/Under-Rated-Fighters.html).  
+In this post, I discussed what made a fighter Over Rated. The results emanating from the dataset were somewhat misleading and not as interesting as those for the [Under Rated fighters](https://aggression-to-the-mean.github.io/AttM/for-the-people/arts/2021/02/19/Under-Rated-Fighters.html).  
 
-As a result, I decided to focus on the interesting odds profile of Gustafsson. Certainly, Gustafsson appears to have been Over Rated since his first Jones contest. However, it is unclear if that close decision against Jones biased the odds in Gustafsson's favor, or if the bettors had always had such belief in his talents (preceeding the first Jones fight).  
-
-In future posts, I may explore additional fighter-specific odds information such as:  
-- Least and Most Valued fighters (regardless of performance)   
+As a result, I decided to focus on the interesting odds profile of Gustafsson. Certainly, Gustafsson appears to have been Over Rated since his first Jones contest. However, it is unclear if that close decision against Jones biased the odds in Gustafsson's favor, or if the bettors had always had such belief in his talents (preceeding the first Jones fight).   
